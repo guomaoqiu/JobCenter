@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}JobService - 登录{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <center>
+    		<img src="{{ url_for('static',filename='img/logo-taskio.png' )}}">
+    </center>
+</div>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+    <br>
+    <p>忘记密码？点击<a href="{{ url_for('auth.password_reset_request') }}">这里</a>找回。</p>
+    <p>新用户？点击<a href="{{ url_for('.register') }}">这里</a>注册。</p>
+
+</div>
+<div class="col-md-4"></div>
+{% endblock %}

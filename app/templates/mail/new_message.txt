@@ -1,0 +1,3 @@
+用户: {{ username }}
+邮箱: {{ email }}
+内容: {{ content }}

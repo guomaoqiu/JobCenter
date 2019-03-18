@@ -1,0 +1,39 @@
+[[source]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+flask-bootstrap = "*"
+flask-login = "*"
+flask-mail = "*"
+flask-migrate = "*"
+flask-moment = "*"
+flask-sqlalchemy = "*"
+flask-script = "*"
+flask-wtf = "*"
+"jinja2" = "*"
+mako = "*"
+markupsafe = "*"
+sqlalchemy = "*"
+wtforms = "*"
+alembic = "*"
+blinker = "*"
+click = "*"
+itsdangerous = "*"
+python-editor = "*"
+Werkzeug = "*"
+python-dotenv = "*"
+requests = "*"
+pymysql = "*"
+pymongo = "*"
+redis = "==2.10.6"
+flask-debugtoolbar = "*"
+flask-apscheduler = "*"
+flask-cors = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"

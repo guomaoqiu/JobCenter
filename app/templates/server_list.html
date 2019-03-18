@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}微店店主资源共享{% endblock %}
+{% block page_content %}
+    <script src="{{  url_for('static',filename='opsplatform/js/jquery-2.1.1.js') }}"></script>
+    <link href="{{  url_for('static',filename='opsplatform/css/dataTables.bootstrap.css') }}" rel="stylesheet"/>
+
+    <script src="{{  url_for('static',filename='opsplatform/js/layer.js') }}"></script>
+    <script src="{{  url_for('static',filename='opsplatform/js/jquery.dataTables.js') }}"></script>
+    <script src="{{  url_for('static',filename='opsplatform/js/dataTables.bootstrap.js') }}"></script>
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li class="active">
+                    <strong>本站目的: 微店店铺互相收藏、提高店铺质量、互帮互助，财富共盈~</strong><br>
+                    <strong>连基本的互相收藏都做不到，那其他的也就别谈了</strong>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div id="ct-chart1" class="ct-perfect-fourth"></div>
+                                    <div class="panel-content">
+                                        <table id="table2_demo2" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                
+                                                   <th>id</th>
+{#                                                   <th>微信昵称</th>#}
+                                                   <th>微店店铺名</th>
+
+                                                    {% if current_user.is_authenticated %}
+                                                         <th>微店店链接</th>
+                                                        <th>动作</th>
+                                                    <!--  仅管理员可以访问的视图  -->
+                                                        {% endif %}
+                                                   
+                                                </tr>
+                                            </thead>
+                                             <tbody>
+                                             {% for each_data in data %}
+                                                        <tr>
+                                                            <td>{{ loop.index }}</td>
+{#                                                            <td>{{ each_data['wechat_name'] }}</td>#}
+                                                            <td>
+                                                                  <a target="_blank" style="color:#44b549" href="{{ each_data['shop_link'] }}" title="点击访问">
+                                                                  {{ each_data['shop_name'] }}
+                                                                </a>
+                                                            </td>
+                                                            {% if current_user.is_authenticated %}
+                                                                <td>{{ each_data['shop_link'] }}</td>
+                                                                <td>
+                                                                <input type="button" class="btn btn-xs btn-danger" check_id="{{ each_data['id'] }}" name="{{ each_data['shop_name'] }}" value="删除" onclick="del_raw(this)">
+                                                                </td>
+                                                        {% endif %}
+
+
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                        </table>
+                                    <div class="col-md-4">
+                                    {{ wtf.quick_form(form) }}
+                                    注意填写的链接不能有中文汉字
+                                        填入格式如: <p style="color: #ff0000">https://xxxxxxxxxxxxxxxxxxx</p>
+                                    <hr>
+
+                                    </div>
+                                          <div class="col-lg-8">
+                                <ol class="breadcrumb">
+                                    <h3>注意事项:</h3>
+                                    <li>
+                                    0.点击对应的店铺名称将会跳转到该店主的店铺.<br>
+                                    1.微店店铺名请尽量限制在10个字以内.<br>
+				    2.如果您对某个店铺商品感兴趣，您也可以联系店主帮他代理.<br>
+                                    3.如果您的信息填写错误，请扫码联系站长.
+                                    </li>
+                                    <br>
+                                    <img src="http://demo.sctux.com/static/auth/img/favicon/WechatIMG189.jpeg" width=180>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <script type="text/javascript">
+            // 全局
+
+
+            //操作选项里面的"删除"功能
+            function del_raw(_this) {
+
+                    var check_id = $(_this).attr("check_id");
+                    var shop_name = $(_this).attr("name");
+                    var data= {
+                            data: JSON.stringify({
+                                'check_id': check_id
+                            }),
+                        }
+                    // alert(check_id)
+                    swal({
+                      title: "您确定要删除店铺:\n" + shop_name,
+                      text: "删除后需重新添加，请谨慎操作！",
+                      type: "warning",
+                      showCancelButton: true,
+                      showLoaderOnConfirm: true,
+                      confirmButtonColor: "#DD6B55",
+                      confirmButtonText: "是的，删除它",
+                      cancelButtonText: "我在想想吧...",
+                      closeOnConfirm: false,
+                      closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
+                    },
+                      function(isConfirm){
+                      if (isConfirm) {    // 如果确认就会去携带者hostname去后台处理
+                        $.ajax ({
+                                type: 'POST',
+                                data: data,
+                                dataType: 'json',
+                                url:"{{ url_for('main.delete_shop') }}",
+                                success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
+                                    if (res.result) {
+                                        swal(res.message, "Your imaginary file has been deleted.", "success");
+                                        //$("input[check_id="+check_id+"]").parents("tr").remove(); //获取要删除的那行节点
+                                        $(_this).parents("tr").remove();
+                                        //window.location.reload() //重新加载当前页面
+                                    }
+                                    else {
+                                        swal(res.message, "Your imaginary file is safe :)", "error");
+                                    }
+                                }
+                            });
+                         }
+                    });
+                }
+
+       </script>
+
+
+
+    <!-- 表格分页功能 -->
+    <script type="text/javascript">
+      $(function () {
+        var language = {
+          search: '搜索：',
+          lengthMenu: "每页显示 _MENU_ 记录",
+          zeroRecords: "没找到相应的数据！",
+          info: "分页 _PAGE_ / _PAGES_",
+          infoEmpty: "暂无数据！",
+          infoFiltered: "(从 _MAX_ 条数据中搜索)",
+          paginate: {
+            first: '首页',
+            last: '尾页',
+            previous: '上一页',
+            next: '下一页'
+          }
+        };
+        $('#table2_demo2').dataTable({
+          paging: false, //隐藏分页
+          ordering: true, //关闭排序
+          info: false, //隐藏左下角分页信息
+          searching: true, //关闭搜索
+          pageLength : 3, //每页显示几条数据
+          lengthChange: true, //不允许用户改变表格每页显示的记录数
+          language: language, //汉化
+          columnDefs: [  // 这是第一列不进行排序
+            { "orderable": false, "targets": 0 }
+          ]
+        } );
+      });
+    </script>
+
+    <!--  获取主机详情 -->
+    <script>
+      function get_hostdetail(_this) {
+            var hostname = $(_this).attr("name");
+            layer.open({
+            title: "主机详情",
+            type: 2,
+            area: ['800px', '400px'],
+            fixed: true, //不固/
+            closeBtn: 0,
+            shadeClose: true,
+            maxmin: true,
+            skin: 'layui-layer-rim',
+            content: '../display_hostdetail/' +hostname
+            });
+      }
+    </script>
+
+    <script>
+      function salt_cmd(_this) {
+          var hostname = $(_this).attr("name");
+            layer.open({
+            type: 2,
+            area: ['810px', '710px'],
+            fixed: true,
+            closeBtn: 0,
+            shadeClose: true,
+            maxmin: true,
+            skin: 'layui-layer-rim',
+            content: '../saltcmd/' + hostname
+            });
+      }
+    </script>
+
+{% endblock %}
+
+          
+    <script type="text/javascript">
+        function resetChosen() {
+            var config = {
+                '.chosen-select': {
+                    width: "100%"
+                },
+                '.chosen-select-deselect': {
+                    allow_single_deselect: true
+                },
+                '.chosen-select-no-single': {
+                    disable_search_threshold: 10
+                },
+                '.chosen-select-no-results': {
+                    no_results_text: 'Oops, nothing found!'
+                },
+                '.chosen-select-width': {
+                    width: "100%"
+                },
+
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+            $('#groups').trigger("chosen:updated");
+            $('#edit_groups').trigger("chosen:updated");
+        }
+
+        Array.prototype.contains = function (needle) {
+            for (i in this) {
+                if (this[i] == needle) return true;
+            }
+            return false;
+        }
+    </script>
+
+
+
+
+    
+

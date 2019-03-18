@@ -1,0 +1,395 @@
+{% extends "base.html" %}
+{% block title %}资产管理 - 主机列表 - OPS{% endblock %}
+{% block content %}
+    <script src="{{  url_for('static',filename='opsplatform/js/jquery-2.1.1.js') }}"></script>
+    <link href="{{  url_for('static',filename='opsplatform/css/dataTables.bootstrap.css') }}" rel="stylesheet"/>
+
+    <script src="{{  url_for('static',filename='opsplatform/js/layer.js') }}"></script>
+    <script src="{{  url_for('static',filename='opsplatform/js/jquery.dataTables.js') }}"></script>
+    <script src="{{  url_for('static',filename='opsplatform/js/dataTables.bootstrap.js') }}"></script>
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-8">
+            <h2>资产管理</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ url_for('main.index')}}">Home</a>
+                </li>
+
+                <li class="active">
+                    <strong>服务器列表</strong>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div id="ct-chart1" class="ct-perfect-fourth"></div>
+                                    <div class="panel-content">
+                                        <table id="table2_demo2" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                   <th style="width: 12px">
+                                                      <input type="checkbox" name="checkall" value="">
+                                                   </th>
+                                                   <th>Id</th>
+                                                   <th>主机名</th>
+                                                   <th>内网IP</th>
+                                                   <th>外网IP</th>
+                                                   <th>总内存</th>
+                                                   <th>CPU类型</th>
+                                                   <th>CPU颗数</th>
+                                                   <th>系统版本</th>
+                                                   <th>内核版本</th>
+                                                   <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                             <tbody>
+                                             {% for each_data in data %}
+                                                        <tr>
+                                                            <td>
+                                                                <input  class="checkbox_id" type="checkbox" name="abc" value="{{ each_data['hostname'] }}">
+                                                            </td>
+                                                            <!-- <td>{{each_data['id'] }}</td> -->
+
+                                                            <td>{{ loop.index }}</td>
+                                                            <td>{{ each_data['hostname'] }}</td>
+                                                            <td>{{ each_data['private_ip'] }}</td>
+                                                            <td>{{ each_data['external_ip'] }}</td>
+                                                            <td>{{ each_data['mem_total'] }} M</td>
+                                                            <td>{{ each_data['cpu_type'] }}</td>
+                                                            <td>{{ each_data['num_cpus'] }}</td>
+                                                            <td>{{ each_data['os_release'] }}</td>
+                                                            <td>{{ each_data['kernelrelease'] }}</td>
+                                                            <td>
+                                                                <input type="button" class="btn btn-xs btn-success"  check_id="{{ each_data.id }}" name="{{ each_data.hostname }}" value="详情" onclick="get_hostdetail(this)">
+                                                                <input type="button" class="btn btn-xs btn-danger" check_id="{{ each_data['id'] }}" name="{{ each_data['hostname'] }}" value="删除" onclick="">
+                                                                <input type="button" class="btn btn-xs btn-primary" check_id="{{ each_data['id'] }}" name="{{ each_data['hostname'] }}" value="命令执行" onclick="salt_cmd(this)">
+
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                <tfoot >
+                                            <tr>
+                                            <td colspan="11">
+                                                <div class="pull-left">
+                                                    <a class="btn btn-xs btn-danger" id="deleteAll" title="删除">批量删除</a>
+                                                    <a class="btn btn-xs btn-primary" onclick="refresh()" title="刷新">刷新</a>
+                                                    <a class="btn btn-primary btn-xs" onclick="webssh()" title="终端">WEBSSH</a>
+                                                    <button class="btn btn-primary" onclick="login();">Test</button>
+
+
+
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+    //注意，如果远程主机的访问地址是以IP形式出现的，可以忽略此步骤，直接调用 login 方法。具体登陆地址端口请根据实际情况更改.
+    // var testDemo = function() {
+    //     $.ajax({
+    //         url: "http://192.168.56.127:8080/console/chksshdaddr?rnd=" + Math.random(),
+    //         method: "POST",
+    //         data: {
+    //             "vm_addr": "192.168.56.11:22",
+    //         },
+    //         dataType: "jsonp",
+    //         cache: false,
+    //     }).done(function(data) {
+    //         var json = data;
+    //         if (typeof(data) != "object") {
+    //             json = $.parseJSON(data);
+    //             console.log(json)
+    //         }
+    //         if (json.ok) {
+    //             console.log("en_addr:", json.data.sshd_addr);
+    //             login(json.data.sshd_addr, "root", "123.com");
+    //         } else {
+    //             alert("登陆失败，请确认您的主机信息。");
+    //         }
+    //     }).fail(function() {
+    //         alert("未知失败xxxxxxxxxx，请联系管理员。");
+    //     });
+    // };
+
+
+    //注意，如果远程主机的访问地址是以域名或主机形式出现的，可以执行上面步骤后，再调用本方法。具体登陆地址端口请根据实际情况更改.
+         var ip = "192.168.56.11";
+         var username = "root";
+         var password = "123.com";
+
+
+    var login = function(enVMAddr, username, password) {
+        $.ajax({
+            url: "http://192.168.56.127:8080/console/login?rnd=" + Math.random(),
+            method: "POST",
+            data: {
+                "vm_addr": ip,
+                "user_name": username,
+                "user_pwd": password
+            },
+            dataType: "jsonp",
+            jsonp: 'callback',
+            jsonpCallback: "callback",
+            cache: false,
+            contentType: "application/json;utf-8", /*设置返回类型*/
+            async: false
+
+        }).done(function(data) {
+            var json = data;
+            if (typeof(data) != "object") {
+                json = $.parseJSON(data);
+            }
+            if (json.ok) {
+                // location.href = "http://192.168.56.127:8080" + json.data;
+                window.open("http://192.168.56.127:8000" + json.data,"_blank ");
+            } else {
+                alert("登陆失败，请确认您的登陆信息。");
+            }
+        }).fail(function() {
+            alert("未知失败ss，请联系管理员。");
+        });
+    };
+</script>
+
+
+
+
+
+
+
+      </script>
+
+
+        <script type="text/javascript">
+            // 全局
+
+            // 对于多选或者单选的做出判断
+                $('#table2_demo2').find('input[name="checkall"]').click(function(){
+                        var checked = $(this).prop('checked');
+
+                        $('#table2_demo2>tbody input').prop('checked', checked);
+                    });
+                $('#table2_demo2').find(':checkbox').on('click', function(){
+                    if(!this.checked){
+                        $('#table_demo2').find('input[name="checkall"]').prop('checked',false);
+                    }
+                });
+
+            //操作选项里面的"删除"功能
+            function del_raw(_this) {
+                    var csrftoken = $('meta[name=csrf-token]').attr('content')
+                    $.ajaxSetup({
+                        beforeSend: function(xhr, settings) {
+                            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                            }
+                        }
+                    })
+                    var hostname = $(_this).attr("name");
+                    var check_id = $(_this).attr("check_id");
+
+                    var data= {
+                            data: JSON.stringify({
+                                'hostname': hostname,
+                                'check_id': check_id
+                            }),
+                        }
+                    // alert(check_id)
+                    swal({
+                      title: "您确定要删除主机?\n" + hostname,
+                      text: "删除后将无法恢复，请谨慎操作！",
+                      type: "warning",
+                      showCancelButton: true,
+                      showLoaderOnConfirm: true,
+                      confirmButtonColor: "#DD6B55",
+                      confirmButtonText: "是的，删除它",
+                      cancelButtonText: "我在想想吧...",
+                      closeOnConfirm: false,
+                      closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
+                    },
+                      function(isConfirm){
+                      if (isConfirm) {    // 如果确认就会去携带者hostname去后台处理
+                        $.ajax ({
+                                type: 'POST',
+                                data: data,
+                                dataType: 'json',
+                                url:"{{ url_for('main.delete_server')}}",
+                                success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
+                                    if (res.result) {
+                                        swal(res.message, "Your imaginary file has been deleted.", "success");
+                                        //$("input[check_id="+check_id+"]").parents("tr").remove(); //获取要删除的那行节点
+                                        $(_this).parents("tr").remove();
+                                        //window.location.reload() //重新加载当前页面
+                                    }
+                                    else {
+                                        swal(res.message, "Your imaginary file is safe :)", "error");
+                                    }
+                                }
+                            });
+                         }
+                    });
+                }
+                //多项删除
+                $('#deleteAll').click(function() {
+                    var csrftoken = $('meta[name=csrf-token]').attr('content')
+                    $.ajaxSetup({
+                        beforeSend: function(xhr, settings) {
+                            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                            }
+                        }
+                    })
+                    var records = $('#table2_demo2>tbody input:checked').closest('tr');
+                    //判断用户是否选择
+                    if (!records.length){
+                        swal('', "请选择你要删除的选项 :)", "error");
+                        return false;
+                    }
+                    //全选或者部分选择
+                    var host_array=new Array();
+                        $("input[name='abc']:checked").each(function () {
+                        host_array.push($(this).val());
+                        var idstr=host_array.join(',');
+                        var data= {
+                                data: JSON.stringify({
+                                    'hostname': idstr,
+                                }),
+                            }
+
+                      swal({
+                      title: "您确定要删除所选主机?\n",  //+ idstr.replace('\\u','') ,
+                      text: "删除后将无法恢复，请谨慎操作！",
+                      type: "warning",
+                      showCancelButton: true,
+                      showLoaderOnConfirm: true,
+                      confirmButtonColor: "#DD6B55",
+                      confirmButtonText: "是的，删除它",
+                      cancelButtonText: "我再想想吧...",
+                      closeOnConfirm: false,
+                      closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
+                    },
+                      function(isConfirm){
+                      if (isConfirm) {    // 如果确认就会去携带着hostname去后台处理
+
+                       $.ajax ({
+                                type: 'POST',
+                                data: data,
+                                dataType: 'json',
+                                url:"{{ url_for('main.delete_server') }}",
+                                success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
+                                    if (res.result) {
+                                        // swal(res.message, "", "success");
+                                        swal({
+                                             title: res.message ,
+                                             timer: 2000,
+                                             mageUrl: "{{ url_for('static',filename='opsplatform/img/thumbs-up.jpg')}}",
+                                             showConfirmButton: false
+                                           });
+                                          //  setTimeout(function() {
+                                          //       window.location.reload();
+                                          //   }, 1000)
+                                            records.remove();  // 删除前端
+                                    }
+                                    else {
+                                        swal(res.message, "", "error");
+                                    }
+                                }
+                            });
+                      }
+                    });
+                 });
+                });
+
+       </script>
+
+       <!-- 主机刷新 -->
+       <script>
+          function refresh() {
+                var csrftoken = $('meta[name=csrf-token]').attr('content')
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                        }
+                    }
+                })
+                swal({
+                  title: "刷新主机列表？",
+                  type: "info",
+                  showCancelButton: true,
+                  closeOnConfirm: false,
+                  showLoaderOnConfirm: true
+                },
+                 function(isConfirm){
+                  if (isConfirm) {    //
+                    $.ajax ({
+                            type:'POST',
+                            url:"{{ url_for('main.get_server_info')}}",
+                            success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
+                                if (res.result) {
+                                    swal(res.message, "^0^", "success");
+                                    window.location.reload();
+                                }
+                                else {
+                                    swal(res.message, "", "error");
+                                    //window.location.reload();
+                                }
+                            }
+                        });
+                  }
+                });
+            }
+        </script>
+
+
+    <!-- 表格分页功能 -->
+    <script type="text/javascript">
+      $(function () {
+        var language = {
+          search: '搜索：',
+          lengthMenu: "每页显示 _MENU_ 记录",
+          zeroRecords: "没找到相应的数据！",
+          info: "分页 _PAGE_ / _PAGES_",
+          infoEmpty: "暂无数据！",
+          infoFiltered: "(从 _MAX_ 条数据中搜索)",
+          paginate: {
+            first: '首页',
+            last: '尾页',
+            previous: '上一页',
+            next: '下一页'
+          }
+        };
+        $('#table2_demo2').dataTable({
+          paging: true, //隐藏分页
+          ordering: true, //关闭排序
+          info: false, //隐藏左下角分页信息
+          searching: true, //关闭搜索
+          pageLength : 10, //每页显示几条数据
+          lengthChange: true, //不允许用户改变表格每页显示的记录数
+          language: language, //汉化
+          columnDefs: [  // 这是第一列不进行排序
+            { "orderable": false, "targets": 0 }
+          ]
+        } );
+      });
+    </script>
+{% endblock %}

@@ -1,0 +1,175 @@
+{#{% extends "base.html" %}#}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}test{% endblock %}
+
+<link href="https://magicbox.bk.tencent.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://magicbox.bk.tencent.com/static_api/v3/bk/css/bk.css" rel="stylesheet">
+<script src="https://magicbox.bk.tencent.com/static_api/v3/assets/js/jquery-1.10.2.min.js"></script>
+<script src="https://magicbox.bk.tencent.com/static_api/v3/assets/jquery-tabledit-1.2.3/jquery.tabledit.js"></script>
+{% block page_content %}
+
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li class="active">
+                    <strong>test~</strong><br>
+
+                </li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div id="ct-chart1" class="ct-perfect-fourth"></div>
+                                    <div class="panel-content">
+                               <!--
+如果没有引用以下文件，请去掉此注释
+
+-->
+<table class="table table-bordered" id="example1">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>NICKNAME</th>
+            <th>FIRSTNAME</th>
+            <th>LASTNAME</th>
+            <th class="tabledit-toolbar-column"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="a_1">
+            <td><span class="tabledit-span tabledit-identifier">1</span>
+                <input class="tabledit-input tabledit-identifier" type="hidden" name="aid" value="1" disabled="">
+            </td>
+            <td class="tabledit-view-mode"><span class="tabledit-span">markcell</span>
+                <input class="tabledit-input  form-control input-sm" type="text" name="nickname" value="markcell" style="display: none;" disabled="">
+            </td>
+            <td class="tabledit-view-mode"><span class="tabledit-span">Celso</span>
+                <input class="tabledit-input     form-control input-sm" type="text" name="firstname" value="Celso" style="display: none;" disabled="">
+            </td>
+            <td class="tabledit-view-mode"><span class="tabledit-span">Marques</span>
+                <input class="tabledit-input        form-control input-sm" type="text" name="lastname" value="Marques" style="display: none;" disabled="">
+            </td>
+            <td style="white-space: nowrap; width: 1%;">
+                <div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
+                    <div class="btn-group btn-group-sm" style="float: none;">
+                        <button type="button" class="tabledit-edit-button btn btn-sm btn-default" style="float: none;"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button type="button" class="tabledit-delete-button btn btn-sm btn-default" style="float: none;"><span class="glyphicon glyphicon-trash"></span></button>
+                    </div>
+                    <button type="button" class="tabledit-save-button btn btn-sm btn-success" style="display: none; float: none;">保存</button>
+                    <button type="button" class="tabledit-confirm-button btn btn-sm btn-danger" style="display: none; float: none;">确认</button>
+
+                </div>
+            </td>
+        </tr>
+        <tr id="a_2">
+            <td><span class="tabledit-span tabledit-identifier">2</span>
+                <input class="tabledit-input tabledit-identifier" type="hidden" name="aid" value="2" disabled="">
+            </td>
+            <td class="tabledit-view-mode"><span class="tabledit-span">zikospeed</span>
+                <input class="tabledit-input   form-control input-sm" type="text" name="nickname" value="zikospeed" style="display: none;" disabled="">
+            </td>
+            <td class="tabledit-view-mode"><span class="tabledit-span">António</span>
+                <input class="tabledit-input      form-control input-sm" type="text" name="firstname" value="António" style="display: none;" disabled="">
+            </td>
+            <td class="tabledit-view-mode"><span class="tabledit-span">Figueiredo</span>
+                <input class="tabledit-input         form-control input-sm" type="text" name="lastname" value="Figueiredo" style="display: none;" disabled="">
+            </td>
+            <td style="white-space: nowrap; width: 1%;">
+                <div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
+                    <div class="btn-group btn-group-sm" style="float: none;">
+                        <button type="button" class="tabledit-edit-button btn btn-sm btn-default" style="float: none;"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button type="button" class="tabledit-delete-button btn btn-sm btn-default" style="float: none;"><span class="glyphicon glyphicon-trash"></span></button>
+                    </div>
+                    <button type="button" class="tabledit-save-button btn btn-sm btn-success" style="display: none; float: none;">保存</button>
+                    <button type="button" class="tabledit-confirm-button btn btn-sm btn-danger" style="display: none; float: none;">确认</button>
+
+                </div>
+            </td>
+        </tr>
+        <tr id="a_3">
+            <td><span class="tabledit-span tabledit-identifier">3</span>
+                <input class="tabledit-input tabledit-identifier" type="hidden" name="aid" value="3" disabled="">
+            </td>
+            <td class="tabledit-view-mode"><span class="tabledit-span">dotz</span>
+                <input class="tabledit-input    form-control input-sm" type="text" name="nickname" value="dotz" style="display: none;" disabled="">
+            </td>
+            <td class="tabledit-view-mode"><span class="tabledit-span">Márcio</span>
+                <input class="tabledit-input       form-control input-sm" type="text" name="firstname" value="Márcio" style="display: none;" disabled="">
+            </td>
+            <td class="tabledit-view-mode"><span class="tabledit-span">Quental</span>
+                <input class="tabledit-input          form-control input-sm" type="text" name="lastname" value="Quental" style="display: none;" disabled="">
+            </td>
+            <td style="white-space: nowrap; width: 1%;">
+                <div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
+                    <div class="btn-group btn-group-sm" style="float: none;">
+                        <button type="button" class="tabledit-edit-button btn btn-sm btn-default" style="float: none;"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button type="button" class="tabledit-delete-button btn btn-sm btn-default" style="float: none;"><span class="glyphicon glyphicon-trash"></span></button>
+                    </div>
+                    <button type="button" class="tabledit-save-button btn btn-sm btn-success" style="display: none; float: none;">保存</button>
+                    <button type="button" class="tabledit-confirm-button btn btn-sm btn-danger" style="display: none; float: none;">确认</button>
+
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    $('#example1').Tabledit({
+        url: "./demo.json",
+        rowKey: 'a_',
+        columns: {
+            identifier: [0, 'aid'],
+            editable: [
+                [1, 'nickname'], [2, 'firstname'], [3, 'lastname']
+            ]
+        },
+        restoreButton: false,
+        buttons: {
+            edit: {
+                class: 'btn btn-sm btn-default',
+                html: '<span class="glyphicon glyphicon-pencil"></span>',
+                action: 'edit'
+            },
+            delete: {
+                class: 'btn btn-sm btn-default',
+                html: '<span class="glyphicon glyphicon-trash"></span>',
+                action: 'delete'
+            },
+            save: {
+                class: 'btn btn-sm btn-success',
+                html: '保存'
+            },
+            confirm: {
+                class: 'btn btn-sm btn-danger',
+                html: '确认'
+            }
+        },
+        onSuccess: function (data, textStatus, jqXHR){
+            console.log('success');
+        },
+        onFail: function (jqXHR, textStatus, errorThrown){
+            console.log('fail');
+        }
+    });
+</script>
+
+                        </div>
+                    </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+
+
+

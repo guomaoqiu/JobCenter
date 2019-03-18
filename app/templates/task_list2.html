@@ -1,0 +1,333 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<link href="https://magicbox.bk.tencent.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://magicbox.bk.tencent.com/static_api/v3/assets/datatables-1.10.7/dataTables.bootstrap.css" rel="stylesheet"/>
+<!-- <link href="https://magicbox.bk.tencent.com/static_api/v3/bk/css/bk.css" rel="stylesheet"> -->
+<script src="https://magicbox.bk.tencent.com/static_api/v3/assets/js/jquery-1.10.2.min.js"></script>
+<script src="https://magicbox.bk.tencent.com/static_api/v3/assets/datatables-1.10.7/jquery.dataTables.js"></script>
+<script src="https://magicbox.bk.tencent.com/static_api/v3/assets/datatables-1.10.7/dataTables.bootstrap.js"></script>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li class="active">
+                    <strong>Task</strong><br>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div id="ct-chart1" class="ct-perfect-fourth"></div>
+                                    <div class="panel-content">
+
+                                      <table id="table2_demo4" class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="table2_demo4_info">
+                                          <thead>
+                                              <tr role="row">
+                                                  <th class="sorting_asc" rowspan="1" colspan="1" aria-label="名称">任务ID</th>
+                                                  <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="职位: activate to sort column ascending">可执行命令</th>
+                                                  <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan=q"1" colspan="1" aria-label="工资: activate to sort column ascending">时间</th>
+                                                  <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="开始时间: activate to sort column ascending">状态</th>
+                                                  <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="位置: activate to sort column ascending">计划时间(秒 分 时 日 月 周)</th>
+                                                  <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="位置: activate to sort column ascending">下一次执行时间</th>
+                                                  <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="操作">操作</th>
+                                              </tr>
+                                          </thead>
+                                      </table>
+                                        <div class="col-md-4">
+                                          
+
+                                        </div>
+                                        <div class="col-lg-8"></div>
+                                        <dir class="row">
+                                          <table id="table2_demo2" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                   <th style="width: 12px">
+                                                      <input type="checkbox" name="checkall" value="">
+                                                   </th>
+                                                   <th>Id</th>
+                                                   <th>主机名</th>
+                                                   <th>内网IP</th>
+                                                   <th>外网IP</th>
+                                                   <th>总内存</th>
+                                                   <th>CPU类型</th>
+                                                   <th>CPU颗数</th>
+                                                   <th>系统版本</th>
+                                                   <th>内核版本</th>
+                                                   <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                             <tbody>
+                                             {% for each_data in task %}
+                                                        <tr>
+                                                            <td>
+                                                                <input  class="checkbox_id" type="checkbox" name="abc" value="{{ each_data['hostname'] }}">
+                                                            </td>
+                                                            <!-- <td>{{each_data['id'] }}</td> -->
+
+                                                            <td>{{ loop.index }}</td>
+                                                            <td>{{ each_data['id'] }}</td>
+                                                            <td>{{ each_data['private_ip'] }}</td>
+                                                            <td>{{ each_data['external_ip'] }}</td>
+                                                            <td>{{ each_data['mem_total'] }} M</td>
+                                                            <td>{{ each_data['cpu_type'] }}</td>
+                                                            <td>{{ each_data['num_cpus'] }}</td>
+                                                            <td>{{ each_data['os_release'] }}</td>
+                                                            <td>{{ each_data['kernelrelease'] }}</td>
+                                                            <td>
+                                                                <input type="button" class="btn btn-xs btn-success"  check_id="{{ each_data.id }}" name="{{ each_data.hostname }}" value="详情" onclick="get_hostdetail(this)">
+                                                                <input type="button" class="btn btn-xs btn-danger" check_id="{{ each_data['id'] }}" name="{{ each_data['hostname'] }}" value="删除" onclick="">
+                                                                <input type="button" class="btn btn-xs btn-primary" check_id="{{ each_data['id'] }}" name="{{ each_data['hostname'] }}" value="命令执行" onclick="salt_cmd(this)">
+
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                <tfoot >
+                                            <tr>
+                                            <td colspan="11">
+                                                <div class="pull-left">
+                                                    <a class="btn btn-xs btn-danger" id="deleteAll" title="删除">批量删除</a>
+                                                    <a class="btn btn-xs btn-primary" onclick="refresh()" title="刷新">刷新</a>
+                                                    <a class="btn btn-primary btn-xs" onclick="webssh()" title="终端">WEBSSH</a>
+                                                    <button class="btn btn-primary" onclick="login();">Test</button>
+
+
+
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                </tfoot>
+                            </table>
+
+                                        </dir>
+                                      </div>
+                                  </div>
+                                 </div>
+                              </div>
+                          </div>
+                      </div>
+    <script type="text/javascript">
+      $(function () {
+        var language = {
+          search: '搜索：',
+          lengthMenu: "每页显示 _MENU_ 记录",
+          zeroRecords: "没找到相应的数据！",
+          info: "分页 _PAGE_ / _PAGES_",
+          infoEmpty: "暂无数据！",
+          infoFiltered: "(从 _MAX_ 条数据中搜索)",
+          paginate: {
+            first: '首页',
+            last: '尾页',
+            previous: '上一页',
+            next: '下一页'
+          }
+        };
+        $('#table2_demo2').dataTable({
+          paging: true, //隐藏分页
+          ordering: true, //关闭排序
+          info: false, //隐藏左下角分页信息
+          searching: true, //关闭搜索
+          pageLength : 10, //每页显示几条数据
+          lengthChange: true, //不允许用户改变表格每页显示的记录数
+          language: language, //汉化
+          columnDefs: [  // 这是第一列不进行排序
+            { "orderable": false, "targets": 0 }
+          ]
+        } );
+      });
+    </script>
+
+<script type="text/javascript">
+    //表格(DataTables)-4，综合示例
+    var language = {
+      search: '搜索：',
+      lengthMenu: "每页显示 _MENU_ 记录",
+      zeroRecords: "没找到相应的数据！",
+      info: "分页 _PAGE_ / _PAGES_",
+      infoEmpty: "暂无数据！",
+      infoFiltered: "(从 _MAX_ 条数据中搜索)",
+      paginate: {
+        first: '首页',
+        last: '尾页',
+        previous: '上一页',
+        next: '下一页',
+      }
+    }
+    $("#table2_demo4").dataTable({
+        autoWidth: false,
+        lengthChange: true, //不允许用户改变表格每页显示的记录数
+        pageLength : 10, //每页显示几条数据
+        lengthMenu: [5, 10, 20], //每页显示选项
+        pagingType: 'full_numbers',
+        ajax : 'v1/cron/job/show_jobs',
+        ordering: true,
+        columns : [
+          {data:"id",orderable: true},
+          {data:"cmd"},
+          {data:"next_run_time"},
+          {data:"status"},
+          {data:"cron"},
+          {data:"next_run_time"},
+          {
+            data:null,
+            orderable:true,
+            render : function(data, type, row, meta){
+                return "<a class='btn btn-sm btn-danger del'>删除</a> <a class='btn btn-sm btn-primary job_edit'>编辑</a> <a class='btn btn-sm btn-info job_info'>详情</a> <a class='btn btn-sm btn-warning pause_job'>暂停</a> <a class='btn btn-sm btn-success resume_job'>恢复</a>"
+            }
+          }
+        ],
+        language:language
+    });
+
+    //=============================================================================== action.js
+    //======== 公共使用:
+    var t = $("#table2_demo4").DataTable();//获取datatables对象
+
+    // 暂停任务按钮绑定事件
+    $("#table2_demo4 tbody").on('click', 'a.pause_job', function(){
+        var row = t.row( $(this).parents('tr') ),//获取按钮所在的行
+          data = row.data();
+          // alert(data.id)
+                  swal({
+                  title: "是否确定暂停任务: " + data.id,
+                  text: "^o^",
+                  type: "warning",
+                  showCancelButton: true,
+                  showLoaderOnConfirm: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "暂停~",
+                  cancelButtonText: "我在想想吧...",
+                  closeOnConfirm: false,
+                  closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
+                },
+                  function(isConfirm){
+                      if (isConfirm) {
+                        $.ajax ({
+                                type:'POST',
+                                url:"/v1/cron/job/pause",
+                                contentType:'application/json',
+                                datatype: "json",
+                                data: JSON.stringify({"id": data.id}),
+
+                                success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
+                                    console.log(res)
+                                    if (res.status) {
+                                        swal(res.msg, "", "success");
+                                    }
+                                    else {
+                                        swal(res.msg, "", "error");
+                                    }
+                                }
+                            });
+                         }
+                    });
+             });
+    // 恢复任务按钮绑定事件
+    $("#table2_demo4 tbody").on('click', 'a.resume_job', function(){
+        var row = t.row( $(this).parents('tr') ),//获取按钮所在的行
+          data = row.data();
+          // alert(data.id)
+                  swal({
+                  title: "是否确定恢复任务: " + data.id,
+                  text: "^o^",
+                  type: "warning",
+                  showCancelButton: true,
+                  showLoaderOnConfirm: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "恢复~",
+                  cancelButtonText: "我在想想吧...",
+                  closeOnConfirm: false,
+                  closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
+                },
+                  function(isConfirm){
+                      if (isConfirm) {
+                        $.ajax ({
+                                type:'POST',
+                                url:"/v1/cron/job/resume",
+                                contentType:'application/json',
+                                datatype: "json",
+                                data: JSON.stringify({"id": data.id}),
+
+                                success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
+                                    console.log(res)
+                                    if (res.status) {
+                                        swal(res.msg, "", "success");
+                                        windows.reload()
+                                    }
+                                    else {
+                                        swal(res.msg, "", "error");
+                                    }
+                                }
+                            });
+                         }
+                    });
+             });
+
+    // 删除任务按钮绑定事件
+    $("#table2_demo4 tbody").on('click', 'a.del', function(){
+        var row = t.row( $(this).parents('tr') ),//获取按钮所在的行
+          data = row.data();
+          // alert(data.id)
+                  swal({
+                  title: "是否确定删除任务: " + data.id,
+                  text: "^o^",
+                  type: "warning",
+                  showCancelButton: true,
+                  showLoaderOnConfirm: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "删除~",
+                  cancelButtonText: "我在想想吧...",
+                  closeOnConfirm: false,
+                  closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
+                },
+                  function(isConfirm){
+                      if (isConfirm) {
+                        $.ajax ({
+                                type:'DELETE',
+                                url:"/v1/cron/job/remove",
+                                contentType:'application/json',
+                                datatype: "json",
+                                data: JSON.stringify({"id": data.id}),
+
+                                success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
+                                    console.log(res)
+                                    if (res.status) {
+                                        swal(res.msg, "", "success");
+                                        row.remove().draw();
+                                    }
+                                    else {
+                                        swal(res.msg, "", "error");
+                                    }
+                                }
+                            });
+                         }
+                    });
+             });
+   
+    //详情按钮绑定事件
+    $("#table2_demo4 tbody").on('click', 'a.job_info', function(){
+        var row = t.row( $(this).parents('tr') ),//获取按钮所在的行
+          data = row.data();
+          var id = data['id']
+            layer.open({
+              type: 2,
+              skin: 'layui-layer-demo', //样式类名
+              closeBtn: 0, //不显示关闭按钮
+              anim: 2,
+              shadeClose: true, //开启遮罩关闭
+              content: '/v1/cron/job/show_jobs?id=' + id
+            });
+    });
+</script>
+{% endblock %}

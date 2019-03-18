@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}关于站长{% endblock %}
+
+<link href="https://magicbox.bk.tencent.com/static_api/v3/bk/css/bk.css" rel="stylesheet">
+
+
+{% block page_content %}
+<div class="page-header">
+ <div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                   <div class="king-instruction king-instruction-info">
+                        <h5>关于站长</h5>
+                        <img src="http://demo.sctux.com/static/auth/img/favicon/1537437465587.jpg" width="80">
+                    </div>
+            </div>
+        </div>
+      </div>
+   </div>
+</div>
+<button class="btn btn-sm btn-danger" name="" onclick="test(this)">清空所有日志</button>
+
+
+<script>
+      //操作选项里面的"删除"功能
+        function test(_this) {
+                swal({
+                  title: "吃屎吗？",
+                  text: "最原始、最新鲜",
+                  type: "warning",
+                  showCancelButton: true,
+                  showLoaderOnConfirm: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "想吃~",
+                  cancelButtonText: "我在想想吧...",
+                  closeOnConfirm: false,
+                  closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
+                },
+                  function(isConfirm){
+                      if (isConfirm) {
+                        $.ajax ({
+                                type:'POST',
+                                url:"{{ url_for('main.fuck')}}",
+                                success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
+                                    console.log(res)
+                                    if (res.result) {
+                                        swal(res.message, "", "success");
+                                    }
+                                    else {
+                                        swal(res.message, "", "error");
+                                    }
+                                }
+                            });
+                         }
+                    });
+            }
+</script>
+
+{% endblock %}
