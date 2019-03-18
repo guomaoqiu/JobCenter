@@ -5,7 +5,7 @@
 * 支持秒级定时任务
 * 任务可搜索、暂停、编辑、删除
 
-Demo: [http://jobcenter.sctux.com](http://jobcenter.sctux.com/)
+Demo: [http://jobcenter.sctux.com](http://jobcenter.sctux.com/) 2399447849@qq.com / 123.com
 # 用法:
 ```
 $ git clone https://github.com/greyli/JobCenter.git
