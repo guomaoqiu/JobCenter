@@ -10,13 +10,13 @@
 
 用法:
 ```
-$ git clone https://github.com/greyli/watchlist.git
-$ cd watchlist
+$ git clone https://github.com/greyli/JobCenter.git
+$ cd JobCenter
 $ pipenv install --dev
 $ pipenv shell
 # 需提前创建数据库
 $ flask init 
-$ flask forge
+
 $ flask run
 * Running on http://127.0.0.1:5000/
 ```
@@ -29,3 +29,5 @@ $ flask initdb  # 初始化数据库
 $ flask admin  # 创建管理员账户
 $ flask initdb --drop # 删除数据
 ````
+
+
