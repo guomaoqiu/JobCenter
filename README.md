@@ -19,13 +19,23 @@ $ flask run
 ```
 
 # 常用命令
+
 ```
 $ pipenv install  # 创建虚拟环境并安装依赖
 $ pipenv shell  # 激活虚拟环境
 $ flask initdb  # 初始化数据库
 $ flask admin  # 创建管理员账户
 $ flask initdb --drop # 删除数据
-````
+```
+
 ## 平台登录界面
+![](https://raw.githubusercontent.com/guomaoqiu/JobCenter/master/screenhots/login.jpg)
+
+## 平台定时任务列表
+![](https://raw.githubusercontent.com/guomaoqiu/JobCenter/master/screenhots/joblist.jpg)
+
+## 平台定时任务日志
+![](https://raw.githubusercontent.com/guomaoqiu/JobCenter/master/screenhots/loglist.jpg)
+
 
 
