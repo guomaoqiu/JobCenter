@@ -3,7 +3,7 @@
 # @File Name: __init__.py
 # @Date:   2019-03-05 18:37:34
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-18 15:55:31
+# @Last Modified time: 2019-03-19 15:52:21
 
 from flask import Flask
 from app.config import config, TaskConfig
@@ -29,7 +29,7 @@ def create_app(config_name=None):
     app.config['SECRET_KEY'] = 'xxxxxxxxx'
     CORS(app, supports_credentials=True)
 
-    app.debug = True
+    app.debug = False
     toolbar = DebugToolbarExtension()
     toolbar.init_app(app)
 

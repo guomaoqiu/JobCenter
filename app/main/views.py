@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-19 13:57:58
+# @Last Modified time: 2019-03-19 15:53:17
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -78,7 +78,6 @@ def createjob():
         response = {'status': '-1'}
         try:
             data = data
-            print (data)
             #job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
