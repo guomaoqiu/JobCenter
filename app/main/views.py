@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-18 17:26:22
+# @Last Modified time: 2019-03-19 11:46:30
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -13,7 +13,7 @@ from flask_login import login_user, logout_user, login_required,current_user
 from ..models import User, Weidian
 import os,json,time
 from ..email import send_email
-from .forms import JobDateForm
+from .forms import JobDateForm,JobCronForm,JobIntervalForm
 import json as simplejson
 import requests
 # from ops.task_scheduler_bak.josn import exec_shell
@@ -23,7 +23,8 @@ import datetime
 from datetime import date
 from app.job.views import show_jobs,job_log
 from ..models import TaskLog
-
+from .. import scheduler
+from app.job.core import jobfromparm
 ######################################################################
 @main.route('/')
 #@login_required
@@ -39,8 +40,6 @@ def index():
 
 @main.route('/joblog')
 def joblog():
-    #job_log = job_log()
-    #print (job_log)
     return render_template('all_job_log.html')
 
 @main.route('/dellog',methods=['DELETE'])
@@ -56,70 +55,71 @@ def dellog():
     except Exception as e:
         response["msg"] = "删除失败 --- %s" % e
         response['status'] = False    
-
-   
     return jsonify(response)
 
-@main.route('/createjob')
+@main.route('/createjob',methods=['POST','GET'])
 def createjob():
     #job_log = job_log()
     #print (job_log)
-    return render_template('create_job.html')
+    print (requests)
+    form_date = JobDateForm()
+    if form_date.validate_on_submit():
+        data = {
+            "id": form_date.job_id.data,
+            "cmd": form_date.func_cmd.data,
+            "run_date": form_date.run_date.data,
+            "trigger_type": "date"
+        }
+        response = {'status': '-1'}
+        try:
+            data = data
+            print (data)
+            job_id = jobfromparm(scheduler,**data)
+            flash('定时任务 {0} 添加成功'.format(data['id']),'success')
+        except Exception as e:
+            response['msg'] = str(e)
+            print(e)
+            flash('定时任务 {0} 添加失败 {1}'.format(data['id'],e),'danger')
 
-# ######################################################################
+    # cron job
+    form_cron = JobCronForm()
+    if form_cron.validate_on_submit():
+        data = {
+            "id": form_cron.job_id.data,
+            "cmd": form_cron.func_cmd.data,
+            "cron": form_cron.cron_date.data,
+            "trigger_type": "cron"
+        }
+        response = {'status': '-1'}
+        try:
+            data = data
+            print (data)
+            job_id = jobfromparm(scheduler,**data)
+            flash('定时任务 {0} 添加成功'.format(data['id']),'success')
+        except Exception as e:
+            response['msg'] = str(e)
+            print(e)
+            flash('定时任务 {0} 添加失败 {1}'.format(data['id'],e),'danger')
+    
+    # interval job
+    form_interval = JobIntervalForm()
+    if form_interval.validate_on_submit():
+        data = {
+            "id": form_interval.job_id.data,
+            "cmd": form_interval.func_cmd.data,
+            "start_date": form_interval.start_date.data,
+            "end_date": form_interval.end_date.data,
+            "trigger_type": "interval"
+        }
+        response = {'status': '-1'}
+        try:
+            data = data
+            print (data)
+            job_id = jobfromparm(scheduler,**data)
+            flash('定时任务 {0} 添加成功'.format(data['id']),'success')
+        except Exception as e:
+            response['msg'] = str(e)
+            print(e)
+            flash('定时任务 {0} 添加失败 {1}'.format(data['id'],e),'danger')
 
-def aps_test():
-    print ('执行时间：{0}'.format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) ))
-    return True
-
-@main.route('/create/')
-def add_job():
-    #for i in range(5):
-    print('[add job]: ',aps_test)
-    current_app.apscheduler.add_job(func=aps_test, id="aps_test", trigger="interval", seconds=3, start_date="2019-3-14 13:39:00", end_date="2019-4-14 14:36:00")
-    return 'ok'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@main.route('/delete_shop',methods=['POST','GET'])
-def delete_shop():
-    """从数据库中删除已经存在的主机"""
-    weidian_id = json.loads(request.form.get('data'))['check_id']
-    print (weidian_id)
-    try:
-        db.session.query(Weidian).filter(Weidian.id == weidian_id).delete()
-        result = {'result': True, 'message': u"删除店铺成功" }
-    except Exception as e:
-        result = {'result': False, 'message': u"删除店铺失败,%s" % e}
-    return jsonify(result)
-
-
-@main.route('/about_me',methods=['POST','GET'])
-def about_me():
-    return render_template('about_me.html')
-
-
-
-@main.route('/test',methods=['POST','GET'])
-def test():
-    return render_template('test.html')
+    return render_template('create_job.html',form_date=form_date,form_cron=form_cron,form_interval=form_interval)

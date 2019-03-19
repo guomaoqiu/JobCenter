@@ -3,7 +3,7 @@
 # @File Name: forms.py
 # @Date:   2019-03-07 17:20:38
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-15 15:56:28
+# @Last Modified time: 2019-03-19 11:34:43
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField,TextAreaField
@@ -14,12 +14,26 @@ class NameForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-
-
-
 # 一次性任务表单
 class JobDateForm(FlaskForm):
     # wechat_name = StringField('您的微信群昵称?', validators=[Required()])
-    job_id = StringField('任务名称', validators=[Required()])
-    run_date = StringField('运行时间', validators=[Required()])
-    submit = SubmitField('提交')
+    job_id = StringField('任务名称',default="DATE-" , validators=[Required()])
+    func_cmd = StringField('执行函数或命令', validators=[Required()])
+    run_date = StringField('计划运行时间',default="2019-03-20 11:11:11", validators=[Required()])
+    submit_date = SubmitField('确认添加')
+
+
+class JobCronForm(FlaskForm):
+    # wechat_name = StringField('您的微信群昵称?', validators=[Required()])
+    job_id = StringField('任务名称',default="CRON-" , validators=[Required()])
+    func_cmd = StringField('执行函数或命令', validators=[Required()])
+    cron_date = StringField('计划运行时间(秒 分 时 日 月 周)',default="* * * * * *", validators=[Required()])
+    submit_cron = SubmitField('确认添加')
+
+class JobIntervalForm(FlaskForm):
+    # wechat_name = StringField('您的微信群昵称?', validators=[Required()])
+    job_id = StringField('任务名称',default="INTERVAL-" , validators=[Required()])
+    func_cmd = StringField('执行函数或命令', validators=[Required()])
+    start_date = StringField('star_time',default="2019-03-20 11:11:11", validators=[Required()])
+    end_date = StringField('end_time',default="2019-03-20 11:11:11", validators=[Required()])
+    submit_cron = SubmitField('确认添加')    

@@ -16,39 +16,112 @@
                     <div class="ibox-content">
                         <div id="ct-chart1" class="ct-perfect-fourth"></div>
                         <div class="panel-content">
-                                        <div class="row">
+                                    <div class="row">
                                     <div class="col-md-4">
                                       <div class="card" style="width: 18rem;">
-                                        <img class="card-img-top" src="{{  url_for('static',filename='img/barbarian.png') }}" alt="Card image cap" width="160%"  >
+                                        <img class="card-img-top" src="{{  url_for('static',filename='img/barbarian.png') }}" alt="Card image cap" width="200%"  >
                                         <br>
                                         <div class="card-body">
                                           <h2 class="card-title">Date</h2>
-                                          <a href="#" class="btn btn-primary">创建创建Date job任务</a>
+                                          <a class="nav-link btn btn-primary" href="#" data-toggle="modal" data-target="#DateModal" class="btn btn-primary">创建创建Date job任务</a>
                                         </div>
                                       </div>
                                     </div> 
                                     <div class="col-md-4">
                                       <div class="card" style="width: 18rem;">
-                                        <img class="card-img-top" src="{{  url_for('static',filename='img//goblin.png') }}" alt="Card image cap" width="160%"  >
+                                        <img class="card-img-top" src="{{  url_for('static',filename='img//goblin.png') }}" alt="Card image cap" width="200%"  >
                                         <br>
                                         <div class="card-body">
                                           <h2 class="card-title">Cron</h2>
-                                          <a href="#" class="btn btn-primary">创建创建Cron job任务</a>
+                                          <a class="nav-link btn btn-primary" href="#" data-toggle="modal" data-target="#CronModal" class="btn btn-primary">创建创建Cron job任务</a>                                        
                                         </div>
                                       </div>
                                     </div> 
                                       <div class="col-md-4">
                                       <div class="card" style="width: 18rem;">
-                                        <img class="card-img-top" src="{{  url_for('static',filename='img//wizard.png') }}" alt="Card image cap" width="160%" >
+                                        <img class="card-img-top" src="{{  url_for('static',filename='img//wizard.png') }}" alt="Card image cap" width="200%" >
                                         <br>
                                         <div class="card-body">
                                           <h2 class="card-title">Interval</h2>
-                                          <a href="#" class="btn btn-primary">创建创建Interval job任务</a>
+                                          <a class="nav-link btn btn-primary" href="#" data-toggle="modal" data-target="#IntervalModal" class="btn btn-primary">创建创建Interval job任务</a>   
                                         </div>
                                       </div>
                                     </div> 
                                   </div>  
                                </div>
+
+                              <div class="modal fade" id="CronModal" role="dialog">
+                                <div class="temp-custom-modal-wrap">
+                                  <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content temp-custom-modal-content">
+                                      <button type="button" class="close temp-custom-close-button" data-dismiss="modal">&times;</button>
+                                      <div class="modal-body temp-custom-modal-body">
+                                        <div class="temp-login-form-wrapper">
+                                          <div class="row custom-row">
+                                 
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                              <div class="temp-form-column-wrap">
+                                                <h2>Cron定时任务</h2>
+                                                {{ wtf.quick_form(form_cron) }}
+                                              </div>  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="modal fade" id="DateModal" role="dialog">
+                                <div class="temp-custom-modal-wrap">
+                                  <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content temp-custom-modal-content">
+                                      <button type="button" class="close temp-custom-close-button" data-dismiss="modal">&times;</button>
+                                      <div class="modal-body temp-custom-modal-body">
+                                        <div class="temp-login-form-wrapper">
+                                          <div class="row custom-row">
+                                 
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                              <div class="temp-form-column-wrap">
+                                                <h2>一次性定时任务</h2>
+                                                {{ wtf.quick_form(form_date) }}
+                                              </div>  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="modal fade" id="IntervalModal" role="dialog">
+                                <div class="temp-custom-modal-wrap">
+                                  <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content temp-custom-modal-content">
+                                      <button type="button" class="close temp-custom-close-button" data-dismiss="modal">&times;</button>
+                                      <div class="modal-body temp-custom-modal-body">
+                                        <div class="temp-login-form-wrapper">
+                                          <div class="row custom-row">
+                                 
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                              <div class="temp-form-column-wrap">
+                                                <h2>间隔定时任务</h2>
+                                                {{ wtf.quick_form(form_interval) }}
+                                              </div>  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
                           </div>
                         </div>
                     </div>
