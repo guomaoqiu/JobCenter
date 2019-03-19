@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-19 12:01:10
+# @Last Modified time: 2019-03-19 13:50:31
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -24,6 +24,8 @@ from app.job.views import show_jobs,job_log
 from ..models import TaskLog
 from .. import scheduler
 from app.job.core import jobfromparm
+
+
 ######################################################################
 @main.route('/')
 @login_required
@@ -62,11 +64,11 @@ def dellog():
 @main.route('/createjob',methods=['POST','GET'])
 @login_required
 def createjob():
-    #job_log = job_log()
-    #print (job_log)
-    print (requests)
     form_date = JobDateForm()
-    if form_date.validate_on_submit():
+    form_cron = JobCronForm()
+    form_interval = JobIntervalForm()
+   
+    if form_date.submit_date.data and form_date.validate_on_submit():
         data = {
             "id": form_date.job_id.data,
             "cmd": form_date.func_cmd.data,
@@ -77,7 +79,7 @@ def createjob():
         try:
             data = data
             print (data)
-            #job_id = jobfromparm(scheduler,**data)
+            job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
@@ -85,8 +87,8 @@ def createjob():
             flash('定时任务 {0} 添加失败 {1}'.format(data['id'],e),'danger')
 
     # cron job
-    form_cron = JobCronForm()
-    if form_cron.validate_on_submit():
+    #form_cron = JobCronForm()
+    if form_cron.submit_cron.data and form_cron.validate_on_submit():
         data = {
             "id": form_cron.job_id.data,
             "cmd": form_cron.func_cmd.data,
@@ -97,7 +99,7 @@ def createjob():
         try:
             data = data
             print (data)
-            #job_id = jobfromparm(scheduler,**data)
+            job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
@@ -105,8 +107,8 @@ def createjob():
             flash('定时任务 {0} 添加失败 {1}'.format(data['id'],e),'danger')
     
     # interval job
-    form_interval = JobIntervalForm()
-    if form_interval.validate_on_submit():
+    #form_interval = JobIntervalForm()
+    if form_interval.submit_interval.data and form_interval.validate_on_submit():
         data = {
             "id": form_interval.job_id.data,
             "cmd": form_interval.func_cmd.data,
@@ -118,7 +120,7 @@ def createjob():
         try:
             data = data
             print (data)
-            #job_id = jobfromparm(scheduler,**data)
+            job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
