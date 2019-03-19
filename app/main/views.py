@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-19 13:50:31
+# @Last Modified time: 2019-03-19 13:56:03
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -79,7 +79,7 @@ def createjob():
         try:
             data = data
             print (data)
-            job_id = jobfromparm(scheduler,**data)
+            #job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
@@ -87,7 +87,6 @@ def createjob():
             flash('定时任务 {0} 添加失败 {1}'.format(data['id'],e),'danger')
 
     # cron job
-    #form_cron = JobCronForm()
     if form_cron.submit_cron.data and form_cron.validate_on_submit():
         data = {
             "id": form_cron.job_id.data,
@@ -99,7 +98,7 @@ def createjob():
         try:
             data = data
             print (data)
-            job_id = jobfromparm(scheduler,**data)
+            #job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
@@ -107,7 +106,6 @@ def createjob():
             flash('定时任务 {0} 添加失败 {1}'.format(data['id'],e),'danger')
     
     # interval job
-    #form_interval = JobIntervalForm()
     if form_interval.submit_interval.data and form_interval.validate_on_submit():
         data = {
             "id": form_interval.job_id.data,
@@ -120,7 +118,7 @@ def createjob():
         try:
             data = data
             print (data)
-            job_id = jobfromparm(scheduler,**data)
+            #job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
