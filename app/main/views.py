@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-19 15:53:17
+# @Last Modified time: 2019-03-19 16:21:00
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -15,10 +15,7 @@ import os,json,time
 from ..email import send_email
 from .forms import JobDateForm,JobCronForm,JobIntervalForm
 import json as simplejson
-import requests
-import subprocess
-import json
-import datetime
+import requests, subprocess, json, datetime
 from datetime import date
 from app.job.views import show_jobs,job_log
 from ..models import TaskLog
@@ -26,27 +23,28 @@ from .. import scheduler
 from app.job.core import jobfromparm
 
 
-######################################################################
 @main.route('/')
-@login_required
+# @login_required
 def index():
-    '''
-    @note: 返回主页内容
-    '''
+    ''' 返回主页内容 '''
     if not current_user.is_authenticated:
         return redirect('auth/login')
     else:
         task =  show_jobs()
         return render_template('all_job_list.html',task=task)
-@login_required
+
 
 @main.route('/joblog')
-def joblog():
-    return render_template('all_job_log.html')
 @login_required
+def joblog():
+    ''' 返回job日志 '''
+    return render_template('all_job_log.html')
+
 
 @main.route('/dellog',methods=['DELETE'])
+@login_required
 def dellog():
+    ''' 删除job日志 '''
     response = {}
     data = request.get_json(force=True)
     db_id = data.get('id')
@@ -64,6 +62,7 @@ def dellog():
 @main.route('/createjob',methods=['POST','GET'])
 @login_required
 def createjob():
+    ''' 创建定时任务 '''
     form_date = JobDateForm()
     form_cron = JobCronForm()
     form_interval = JobIntervalForm()

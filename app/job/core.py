@@ -3,7 +3,7 @@
 # @File Name: core.py
 # @Date:   2019-03-13 10:20:38
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-18 16:13:02
+# @Last Modified time: 2019-03-19 16:58:51
 
 from .public import exec_shell
 from ..models import TaskLog
@@ -11,6 +11,7 @@ from .. import db, scheduler
 
 def exe_cmd(cmd,task_id):
     '''执行CMD命令'''
+ 
     with scheduler.app.app_context():
         recode, stdout = exec_shell(cmd)
         data = dict(

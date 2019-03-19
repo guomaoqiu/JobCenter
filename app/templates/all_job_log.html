@@ -90,15 +90,15 @@
         ordering: true,
         columns : [
           {data:"id",orderable: true},
-          {data:"task_id"},
+          {data:"task_id",orderable: false},
           // {data:"next_run_time"},
-          {data:"status"},
-          {data:"exe_time"},
-          {data:"cmd"},
+          {data:"status",orderable: false},
+          {data:"exe_time",orderable: false},
+          {data:"cmd",orderable: false},
           // {data:"stdout"},
           {
             data:null,
-            orderable:true,
+            orderable:false,
             render : function(data, type, row, meta){
                 return "<a class='btn btn-sm btn-danger del'>删除</a> <a class='btn btn-sm btn-success job_info'>输出</a>"
             }

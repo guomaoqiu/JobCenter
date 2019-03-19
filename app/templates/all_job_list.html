@@ -79,12 +79,12 @@
         ajax : 'v1/cron/job/show_jobs/',
         ordering: true,
         columns : [
-          {data:"id",orderable: true},
-          {data:"cmd"},
+          {data:"id",orderable: false},
+          {data:"cmd",orderable: false},
           // {data:"next_run_time"},
-          {data:"status"},
-          {data:"cron"},
-          {data:"next_run_time"},
+          {data:"status",orderable: false},
+          {data:"cron",orderable: false},
+          {data:"next_run_time",orderable: false},
           {
             data:null,
             orderable:true,

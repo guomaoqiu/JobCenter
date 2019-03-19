@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# @Author: guomaoqiu
+# @File Name: views.py
+# @Date:   2019-03-19 11:59:48
+# @Last Modified by:   guomaoqiu
+# @Last Modified time: 2019-03-19 16:58:48
 #-*- coding:utf-8 -*-
 
 from flask import render_template, redirect, request, url_for, flash

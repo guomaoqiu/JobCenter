@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# @Author: guomaoqiu
+# @File Name: forms.py
+# @Date:   2019-03-14 09:51:08
+# @Last Modified by:   guomaoqiu
+# @Last Modified time: 2019-03-19 16:58:44
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import Required, Length, Email, Regexp, EqualTo
