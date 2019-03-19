@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-19 13:56:03
+# @Last Modified time: 2019-03-19 13:57:58
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -124,5 +124,5 @@ def createjob():
             response['msg'] = str(e)
             print(e)
             flash('定时任务 {0} 添加失败 {1}'.format(data['id'],e),'danger')
-
+    flash("Demo环境已关闭任务添加功能","info")        
     return render_template('create_job.html',form_date=form_date,form_cron=form_cron,form_interval=form_interval)
