@@ -3,7 +3,8 @@
 * 定时任务统一管理
 * 完全兼容Crontab
 * 支持秒级定时任务
-* 任务可搜索、暂停、编辑、删除
+* 作业任务可搜索、暂停、编辑、删除
+* 作业任务持久化存储、三种不同触发器类型作业动态添加
 
 Demo: [http://jobcenter.sctux.com](http://jobcenter.sctux.com/)
 
@@ -32,13 +33,15 @@ $ flask initdb --drop # 删除数据
 ```
 
 ## 平台登录界面
-![](https://raw.githubusercontent.com/guomaoqiu/JobCenter/master/screenhots/login.jpg)
+![](https://blog.sctux.com/2019/03/19/Flask%E7%BB%93%E5%90%88APScheduler%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E6%A1%86%E6%9E%B6%E5%B9%B3%E5%8F%B0/login.png)
 
-## 平台定时任务列表
-![](https://raw.githubusercontent.com/guomaoqiu/JobCenter/master/screenhots/joblist.jpg)
+## 定时任务添加
+![](https://blog.sctux.com/2019/03/19/Flask%E7%BB%93%E5%90%88APScheduler%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E6%A1%86%E6%9E%B6%E5%B9%B3%E5%8F%B0/addjob.png)
 
 ## 平台定时任务日志
-![](https://raw.githubusercontent.com/guomaoqiu/JobCenter/master/screenhots/loglist.jpg)
+![](https://blog.sctux.com/2019/03/19/Flask%E7%BB%93%E5%90%88APScheduler%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E6%A1%86%E6%9E%B6%E5%B9%B3%E5%8F%B0/joblog.png)
 
+## 平台任务操作
+![](https://blog.sctux.com/2019/03/19/Flask%E7%BB%93%E5%90%88APScheduler%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E6%A1%86%E6%9E%B6%E5%B9%B3%E5%8F%B0/pausejob.png)
 
 
