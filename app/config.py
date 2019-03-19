@@ -3,7 +3,7 @@
 # @File Name: config.py
 # @Date:   2018-02-28 11:57:30
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-15 17:39:07
+# @Last Modified time: 2019-03-19 11:53:06
 import os, logging
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -36,7 +36,7 @@ class TaskConfig(object):
         'coalesce': False,
         'max_instances': 5
     }
-    SCHEDULER_API_ENABLED = True
+    SCHEDULER_API_ENABLED = False
     
 
     # 任务日志

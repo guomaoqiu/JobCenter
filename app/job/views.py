@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-12 17:28:21
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-18 17:56:10
+# @Last Modified time: 2019-03-19 11:55:55
 
 from . import job
 from .. import scheduler
@@ -11,11 +11,13 @@ from flask import request, jsonify, Response
 import json
 from .. import db
 from ..models import TaskLog
+from flask_login import login_required
 
 from .public import DateEncoder
 from .core import jobfromparm, get_job_logs
 
 @job.route('/pause',methods=['POST'])
+@login_required
 def pause_job():
     '''暂停作业'''
     print(request)
@@ -34,6 +36,7 @@ def pause_job():
  
 
 @job.route('/resume',methods=['POST'])
+@login_required
 def resume_job():
     '''恢复作业'''
     response = {'status': False}
@@ -48,6 +51,7 @@ def resume_job():
     return jsonify(response)
 
 @job.route('/remove',methods=['DELETE'])
+@login_required
 def reomve_jobs():
     '''删除作业'''
     response = {'status': False}
@@ -66,6 +70,7 @@ def reomve_jobs():
     return jsonify(response)
 
 @job.route('/edit', methods=['POST'])
+@login_required
 def edit_job():
     '''修改作业'''
     response = {'status': '-1'}
@@ -84,6 +89,7 @@ def edit_job():
     return json.dumps(response)
 
 @job.route('/add', methods=['POST'])
+@login_required
 def add_job():
     '''新增作业'''
     response = {'status': '-1'}
@@ -103,6 +109,8 @@ def add_job():
     #return json.dumps(response)
 
 @job.route('/show_jobs/', methods=['GET'])
+@login_required
+
 def show_jobs():
     '''获取所有jobs信息'''
     response = {}
@@ -183,6 +191,8 @@ def show_jobs():
     return result
 
 @job.route('/job_log', methods=['GET'])
+@login_required
+
 def job_log():
     '''获取所有job log信息'''
     response = {}
