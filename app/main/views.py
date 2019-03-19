@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-19 11:46:30
+# @Last Modified time: 2019-03-19 12:01:10
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -16,7 +16,6 @@ from ..email import send_email
 from .forms import JobDateForm,JobCronForm,JobIntervalForm
 import json as simplejson
 import requests
-# from ops.task_scheduler_bak.josn import exec_shell
 import subprocess
 import json
 import datetime
@@ -27,7 +26,7 @@ from .. import scheduler
 from app.job.core import jobfromparm
 ######################################################################
 @main.route('/')
-#@login_required
+@login_required
 def index():
     '''
     @note: 返回主页内容
@@ -37,10 +36,12 @@ def index():
     else:
         task =  show_jobs()
         return render_template('all_job_list.html',task=task)
+@login_required
 
 @main.route('/joblog')
 def joblog():
     return render_template('all_job_log.html')
+@login_required
 
 @main.route('/dellog',methods=['DELETE'])
 def dellog():
@@ -57,7 +58,9 @@ def dellog():
         response['status'] = False    
     return jsonify(response)
 
+
 @main.route('/createjob',methods=['POST','GET'])
+@login_required
 def createjob():
     #job_log = job_log()
     #print (job_log)
@@ -74,7 +77,7 @@ def createjob():
         try:
             data = data
             print (data)
-            job_id = jobfromparm(scheduler,**data)
+            #job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
@@ -94,7 +97,7 @@ def createjob():
         try:
             data = data
             print (data)
-            job_id = jobfromparm(scheduler,**data)
+            #job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
@@ -115,7 +118,7 @@ def createjob():
         try:
             data = data
             print (data)
-            job_id = jobfromparm(scheduler,**data)
+            #job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
