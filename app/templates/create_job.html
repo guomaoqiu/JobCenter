@@ -3,10 +3,6 @@
 {% block title %}{% endblock %}
 {% block page_content %}
     <script src="{{  url_for('static',filename='opsplatform/js/jquery-2.1.1.js') }}"></script>
-    <link href="{{  url_for('static',filename='opsplatform/css/dataTables.bootstrap.css') }}" rel="stylesheet"/>
-    <script src="{{  url_for('static',filename='opsplatform/js/layer.js') }}"></script>
-    <script src="{{  url_for('static',filename='opsplatform/js/jquery.dataTables.js') }}"></script>
-    <script src="{{  url_for('static',filename='opsplatform/js/dataTables.bootstrap.js') }}"></script>
     <div class="row wrapper border-bottom white-bg page-heading">
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -61,6 +57,7 @@
                                  
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                               <div class="temp-form-column-wrap">
+                                                
                                                 <h2>Cron定时任务</h2>
                                                 {{ wtf.quick_form(form_cron) }}
                                                 <button type="button" class="close temp-custom-close-button" data-dismiss="modal">取消</button>
@@ -89,7 +86,6 @@
                                                 <h2>一次性定时任务</h2>
                                                 {{ wtf.quick_form(form_date) }}
                                                 <button type="button" class="close temp-custom-close-button" data-dismiss="modal">取消</button>
-
                                               </div>  
                                             </div>
                                           </div>
@@ -132,5 +128,5 @@
                 </div>
             </div>
       </div>
-
 {% endblock %}
+

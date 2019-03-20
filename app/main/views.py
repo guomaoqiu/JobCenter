@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-20 16:07:21
+# @Last Modified time: 2019-03-20 16:25:45
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -21,7 +21,6 @@ from app.job.views import show_jobs,job_log
 from ..models import TaskLog
 from .. import scheduler
 from app.job.core import jobfromparm
-
 
 @main.route('/')
 # @login_required
@@ -77,7 +76,7 @@ def createjob():
         response = {'status': '-1'}
         try:
             data = data
-            job_id = jobfromparm(scheduler,**data)
+            #job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
@@ -96,7 +95,7 @@ def createjob():
         try:
             data = data
             print (data)
-            job_id = jobfromparm(scheduler,**data)
+            #job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
@@ -111,7 +110,6 @@ def createjob():
             "interval_time": form_interval.interval_time.data,
             #"start_date": form_interval.start_date.data,
             #"end_date": form_interval.end_date.data,
-            # "interval_num": form_interval.interval_num.data,
             "trigger_type": "interval"
         }
   
@@ -119,11 +117,11 @@ def createjob():
         try:
             data = data
             print (data)
-            job_id = jobfromparm(scheduler,**data)
+            #job_id = jobfromparm(scheduler,**data)
             flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
             print(e)
             flash('定时任务 {0} 添加失败 {1}'.format(data['id'],e),'danger')
-    #flash("Demo环境已关闭任务添加功能","info")        
+    flash("Demo环境已关闭任务添加功能","info")        
     return render_template('create_job.html',form_date=form_date,form_cron=form_cron,form_interval=form_interval)
