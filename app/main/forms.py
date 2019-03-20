@@ -3,7 +3,7 @@
 # @File Name: forms.py
 # @Date:   2019-03-07 17:20:38
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-20 16:25:24
+# @Last Modified time: 2019-03-20 17:32:58
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField,TextAreaField,SelectField
@@ -25,7 +25,7 @@ class JobDateForm(FlaskForm):
 class JobCronForm(FlaskForm):
     job_id = StringField('任务名称',default="CRON-" , validators=[Required()])
     func_cmd = StringField('执行函数或命令', validators=[Required()])
-    cron_date = StringField('计划运行时间(秒 分 时 日 月 周)',default="* * * * * *", validators=[Required()])
+    cron_date = StringField('计划运行时间(秒 分 时 日 月 周)',default="20 10-15 11-15 * * *", validators=[Required()])
     submit_cron = SubmitField('确认添加')
 
 # JobIntervalForm

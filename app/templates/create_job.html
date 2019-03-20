@@ -85,7 +85,34 @@
                                                 <h2>Cron定时任务</h2>
                                                 {{ wtf.quick_form(form_cron) }}
                                                 <button type="button" class="close temp-custom-close-button" data-dismiss="modal">取消</button>
-
+                                                <hr>
+                                                <div class="panel panel-success">
+                                                    <div class="panel-heading">
+                                                      <h3 class="panel-title">Cron 调度器参数说明</h3>
+                                                     </div>
+                                                    <div class="panel-body">
+                                                    <p>
+                                                      year (int|str) – 年，4位数字<br>
+                                                      month (int|str) – 月 (范围1-12)<br>
+                                                      day (int|str) – 日 (范围1-31)<br>
+                                                      week (int|str) – 周 (范围1-53)<br>
+                                                      day_of_week (int|str) – 周内第几天或者星期几 (范围0-6 或者 mon,tue,wed,thu,fri,sat,sun)<br>
+                                                      hour (int|str) – 时 (范围0-23)<br>
+                                                      minute (int|str) – 分 (范围0-59)<br>
+                                                      second (int|str) – 秒 (范围0-59)<br>
+                                                      start_date (datetime|str) – 最早开始日期(包含)<br>
+                                                      end_date (datetime|str) – 最晚结束时间(包含)<br>
+                                                      timezone (datetime.tzinfo|str) – 指定时区<br>
+                                                    </p>
+                                                    <hr>
+                                                  
+                                                    <p> 1.任务名称: 以调度器名称为统一前缀,后面可按照任务功能自定义名字。</p>
+                                                    <p> 2.计划运行时间的格式为 <code>秒、分、时、月、周</code>,这里注意与interval调度器的区别。
+                                                     以上默认值表示的是该计划定于每天的11点到15点的第10分钟到15分钟，这5分钟的每第20秒执行该任务。 <p>
+                                                
+                                                  
+                                                    </div>
+                                                </div>
                                               </div>  
                                             </div>
                                           </div>
@@ -110,6 +137,20 @@
                                                 <h2>一次性定时任务</h2>
                                                 {{ wtf.quick_form(form_date) }}
                                                 <button type="button" class="close temp-custom-close-button" data-dismiss="modal">取消</button>
+                                                  <hr>
+                                                <div class="panel panel-success">
+                                                    <div class="panel-heading">
+                                                      <h3 class="panel-title">Date 调度器参数说明</h3>
+                                                     </div>
+                                                    <div class="panel-body">
+                                                      <p>
+                                                        run_date (datetime|str) – 作业的运行日期或时间<br>
+                                                        timezone (datetime.tzinfo|str) – 指定时区(默认无需指定)
+                                                      </p>
+                                                      <p> 任务名称: 以调度器名称为统一前缀,后面可按照任务功能自定义名字。</p>
+
+                                                    </div>
+                                                </div>
                                               </div>  
                                             </div>
                                           </div>
@@ -134,6 +175,27 @@
                                                 <h2>间隔定时任务</h2>
                                                 {{ wtf.quick_form(form_interval) }}
                                                 <button type="button" class="close temp-custom-close-button" data-dismiss="modal">取消</button>
+                                                  <hr>
+                                                <div class="panel panel-success">
+                                                    <div class="panel-heading">
+                                                      <h3 class="panel-title">Interval 调度器参数说明</h3>
+                                                     </div>
+                                                    <div class="panel-body">
+                                                      <p>
+                                                          weeks (int) – 间隔几周</br>
+                                                          days (int) – 间隔几天</br>
+                                                          hours (int) – 间隔几小时</br>
+                                                          minutes (int) – 间隔几分钟</br>
+                                                          seconds (int) – 间隔多少秒</br>
+                                                          start_date (datetime|str) – 开始日期</br>
+                                                          end_date (datetime|str) – 结束日期</br>
+                                                          timezone (datetime.tzinfo|str) – 时区</br>
+                                                      </p>
+                                                      <hr>
+                                                      <p> 1.任务名称: 以调度器名称为统一前缀,后面可按照任务功能自定义名字。</p>
+                                                      <p> 2.计划运行时间的格式为 <code>秒、分、时、日、周</code>, 以上默认值表示的是间隔10秒执行一次定时任务。<p>
+                                                    </div>
+                                                </div>
 
                                               </div>  
                                             </div>
