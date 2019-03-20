@@ -3,7 +3,7 @@
 # @File Name: core.py
 # @Date:   2019-03-13 10:20:38
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-19 16:58:51
+# @Last Modified time: 2019-03-20 14:37:00
 
 from .public import exec_shell
 from ..models import TaskLog
@@ -66,6 +66,7 @@ def jobfromparm(scheduler,**jobargs):
     args = jobargs['cmd']
     trigger_type = jobargs['trigger_type']
 
+
     if trigger_type == "date":
         run_date = jobargs['run_date']
         scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='date' ,run_date=run_date, replace_existing=True)
@@ -73,17 +74,29 @@ def jobfromparm(scheduler,**jobargs):
         return id
 
     elif trigger_type == "interval":
-        #start_date = jobargs['start_date']
-        #end_date = jobargs['end_date']
-        
-
-        # scheduler.add_job(func=aps_test, id=id, kwargs={'cmd':args,'task_id':id}, 
-            # trigger='interval', seconds=30,start_date=start_date, end_date=start_date, replace_existing=True,)
-        #scheduler.add_job(func=aps_test, id=id, trigger='interval',start_date=start_date, end_date=start_date, replace_existing=True,)
-        scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id},trigger='interval',seconds=5,  replace_existing=True)
-
-
-        print("添加间隔任务成功---[ %s ] " % id)
+        start_date = jobargs['start_date']
+        end_date = jobargs['end_date']
+        time_type = jobargs['time_type']
+        interval_num = jobargs['interval_num']
+        print("xxxxxxxxxxxxxxx", time_type)
+        if time_type == "weeks":
+            print("weeks job")
+            scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='interval', weeks=int(interval_num),start_date=start_date, end_date=start_date, replace_existing=True)
+        elif time_type == "days":
+            print("days job")
+            scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='interval', days=int(interval_num),start_date=start_date, end_date=start_date, replace_existing=True)
+        elif time_type == "hours":
+            print("hours job")
+            scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='interval', hours=int(interval_num),start_date=start_date, end_date=start_date, replace_existing=True)
+        elif time_type == "minutes":
+            print("minutes job")
+            scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='interval', minutes=int(interval_num),start_date=start_date, end_date=start_date, replace_existing=True)
+        elif time_type == "seconds":
+            print("seconds job")
+            scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='interval', seconds=int(interval_num),start_date=start_date, end_date=start_date, replace_existing=True)
+        else:
+            pass
+        print("添加间隔任务 【{0}】 成功，间隔类型为 【{1}】 ".format(id, time_type))
         return id
 
     elif trigger_type == "cron":
@@ -94,8 +107,6 @@ def jobfromparm(scheduler,**jobargs):
         return id
     else:
         pass
-    
-    
 
 def get_job_logs(args):
     jid = args.get('id')

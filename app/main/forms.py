@@ -3,10 +3,10 @@
 # @File Name: forms.py
 # @Date:   2019-03-07 17:20:38
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-19 13:46:05
+# @Last Modified time: 2019-03-20 10:41:24
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField,TextAreaField
+from wtforms import StringField, SubmitField,TextAreaField,SelectField
 from wtforms.validators import Required, Length, Email, DataRequired , EqualTo, Regexp
 
 class NameForm(FlaskForm):
@@ -34,6 +34,9 @@ class JobIntervalForm(FlaskForm):
     # wechat_name = StringField('您的微信群昵称?', validators=[Required()])
     job_id = StringField('任务名称',default="INTERVAL-" , validators=[Required()])
     func_cmd = StringField('执行函数或命令', validators=[Required()])
+    select = SelectField("间隔周期",choices=[('w',"周"),('d',"天"),('h','时'),('m',"分"),('s','秒')])
+    interval_num = StringField("间隔数值", validators=[Required()])
+
     start_date = StringField('star_time',default="2019-03-20 11:11:11", validators=[Required()])
     end_date = StringField('end_time',default="2019-03-20 11:11:11", validators=[Required()])
     submit_interval = SubmitField('确认添加')    
