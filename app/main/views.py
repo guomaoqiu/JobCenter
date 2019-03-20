@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-20 10:55:41
+# @Last Modified time: 2019-03-20 16:07:21
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -108,25 +108,13 @@ def createjob():
         data = {
             "id": form_interval.job_id.data,
             "cmd": form_interval.func_cmd.data,
-            "start_date": form_interval.start_date.data,
-            "end_date": form_interval.end_date.data,
-            "interval_num": form_interval.interval_num.data,
+            "interval_time": form_interval.interval_time.data,
+            #"start_date": form_interval.start_date.data,
+            #"end_date": form_interval.end_date.data,
+            # "interval_num": form_interval.interval_num.data,
             "trigger_type": "interval"
         }
-                #data = {}
-        tt =form_interval.select.data
-        if tt == "w":
-            data["time_type"] = "weeks"
-        elif tt == "d":
-            data["time_type"] = "days"
-        elif tt == "h":
-            data["time_type"] = "hours"
-        elif tt == "m":
-            data["time_type"] = "minutes"
-        elif tt == "s":
-            data["time_type"] = "seconds"
-        else:
-            pass
+  
         response = {'status': '-1'}
         try:
             data = data

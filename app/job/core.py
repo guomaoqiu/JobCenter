@@ -3,7 +3,7 @@
 # @File Name: core.py
 # @Date:   2019-03-13 10:20:38
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-20 14:37:00
+# @Last Modified time: 2019-03-20 16:06:51
 
 from .public import exec_shell
 from ..models import TaskLog
@@ -74,29 +74,23 @@ def jobfromparm(scheduler,**jobargs):
         return id
 
     elif trigger_type == "interval":
-        start_date = jobargs['start_date']
-        end_date = jobargs['end_date']
-        time_type = jobargs['time_type']
-        interval_num = jobargs['interval_num']
-        print("xxxxxxxxxxxxxxx", time_type)
-        if time_type == "weeks":
-            print("weeks job")
-            scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='interval', weeks=int(interval_num),start_date=start_date, end_date=start_date, replace_existing=True)
-        elif time_type == "days":
-            print("days job")
-            scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='interval', days=int(interval_num),start_date=start_date, end_date=start_date, replace_existing=True)
-        elif time_type == "hours":
-            print("hours job")
-            scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='interval', hours=int(interval_num),start_date=start_date, end_date=start_date, replace_existing=True)
-        elif time_type == "minutes":
-            print("minutes job")
-            scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='interval', minutes=int(interval_num),start_date=start_date, end_date=start_date, replace_existing=True)
-        elif time_type == "seconds":
-            print("seconds job")
-            scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='interval', seconds=int(interval_num),start_date=start_date, end_date=start_date, replace_existing=True)
-        else:
-            pass
-        print("添加间隔任务 【{0}】 成功，间隔类型为 【{1}】 ".format(id, time_type))
+        #start_date = start_date=None
+        start_date=None
+        end_date=None
+        # if not jobargs['start_date']  or not jobargs['end_date']:
+        #     start_date=None
+        #     end_date=None
+        # else:
+        #     start_date = jobargs['start_date']
+        #     end_date = jobargs['end_date']
+
+        cron = jobargs['interval_time'].split(' ')
+        print(start_date,end_date)
+        scheduler.add_job(func=func, id=id, kwargs={'cmd':args,'task_id':id}, trigger='interval', 
+            seconds=int(cron[0]), minutes=int(cron[1]), hours=int(cron[2]), days=int(cron[3]), weeks=int(cron[4]), 
+            start_date=start_date, end_date=start_date, replace_existing=True)
+
+        print(cron)
         return id
 
     elif trigger_type == "cron":
