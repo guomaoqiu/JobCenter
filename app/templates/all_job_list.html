@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-    <script src="{{  url_for('static',filename='opsplatform/js/jquery-2.1.1.js') }}"></script>
+<script src="{{  url_for('static',filename='opsplatform/js/jquery-2.1.1.js') }}"></script>
 <link href="https://magicbox.bk.tencent.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="https://magicbox.bk.tencent.com/static_api/v3/assets/datatables-1.10.7/dataTables.bootstrap.css" rel="stylesheet"/>
 <script src="https://magicbox.bk.tencent.com/static_api/v3/assets/js/jquery-1.10.2.min.js"></script>
@@ -26,12 +26,11 @@
                         <div class="panel-content">
                           <table id="table2_demo4" class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="table2_demo4_info">
                               <thead>
-                                      <th class="sorting_asc" rowspan="1" colspan="1" aria-label="名称">任务ID</th>
-                                      <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="职位: activate to sort column ascending">可执行命令</th>
-                                      <!-- <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="工资: activate to sort column ascending">时间</th> -->
-                                      <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="开始时间: activate to sort column ascending">状态</th>
-                                      <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="位置: activate to sort column ascending">计划时间(秒 分 时 日 月 周)</th>
-                                      <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="位置: activate to sort column ascending">下一次执行时间</th>
+                                      <th class="sorting_asc" rowspan="1" colspan="1" aria-label="任务ID">任务ID</th>
+                                      <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="可执行命令: activate to sort column ascending">可执行命令</th>
+                                      <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="状态: activate to sort column ascending">状态</th>
+                                      <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="计划时间: activate to sort column ascending">计划时间(秒 分 时 日 月 周)</th>
+                                      <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="下一次执行时间: activate to sort column ascending">下一次执行时间</th>
                                       <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="操作">操作</th>
                               </thead>
                           </table>
@@ -46,40 +45,6 @@
                 </div>
             </div>
         </div>
-                            <a class='nav-link btn btn-sm btn-success' data-toggle='modal' data-target='#EeitModal' class='btn btn-primary'>编辑</a>
-                            <div class="modal fade" id="EeitModal" role="dialog">
-                                <div class="temp-custom-modal-wrap">
-                                  <div class="modal-dialog">
-                                    <!-- Modal content-->
-                                    <div class="modal-content temp-custom-modal-content">
-                                      <div class="modal-body temp-custom-modal-body">
-                                        <div class="temp-login-form-wrapper">
-                                          <div class="row custom-row">
-                                 
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                              <div class="temp-form-column-wrap">
-
-                                                <h2>Cron定时任务</h2>
-                                                <button type="button" class="close temp-custom-close-button" data-dismiss="modal">取消</button>
-                                                <hr>
-                                                <div class="panel panel-success">
-                                                    <div class="panel-heading">
-                                                      <h3 class="panel-title">Cron 调度器参数说明</h3>
-                                                     </div>
-                                                    <div class="panel-body">
-                                         
-                                                    </div>
-                                                </div>
-                                              </div>  
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
 
 <!--  -->
 <script type="text/javascript">
@@ -99,6 +64,7 @@
       }
     }
   
+   var editor
 
     $("#table2_demo4").dataTable({
         autoWidth: true,
@@ -120,12 +86,14 @@
             data:null,
             orderable:false,
             render : function(data, type, row, meta){
-                return "<a class='btn btn-sm btn-danger del'>删除</a>  <a class='btn btn-sm btn-info job_info'>编辑</a>  <a class='btn btn-sm btn-warning pause_job'>暂停</a> <a class='btn btn-sm btn-success resume_job'>恢复</a>"
+                return "<a class='btn btn-sm btn-danger del'>删除</a>  <a class='btn btn-sm btn-info job_infox'>编辑</a>  <a class='btn btn-sm btn-warning pause_job'>暂停</a> <a class='btn btn-sm btn-success resume_job'>恢复</a>"
             }
           }
 
         ],
-        language:language
+       
+        language:language,
+  
 
     });
 
@@ -273,5 +241,4 @@
       t.ajax.reload(); // 刷新表格数据，分页信息不会重置
     }, 5000 );
 </script>
-
 {% endblock %}
