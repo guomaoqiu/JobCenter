@@ -11,7 +11,7 @@ Demo: [http://jobcenter.sctux.com](http://jobcenter.sctux.com/)
 2399447849@qq.com / 123.com
 # 用法:
 ```
-$ git clone https://github.com/greyli/JobCenter.git
+$ git clone https://github.com/guomaoqiu/JobCenter.git
 $ cd JobCenter
 $ pipenv install --dev
 $ pipenv shell
