@@ -3,7 +3,7 @@
 # @File Name: webhook.py
 # @Date:   2019-03-21 20:41:23
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 21:10:14
+# @Last Modified time: 2019-03-21 21:10:49
 
 '''
 该小型Flask框架用于触发git push请求；
@@ -49,7 +49,7 @@ def pullcode():
                 return jsonify({"result":False,"message": "pull faild".format(e)})
         else:
             try:
-                print git.Repo.clone_from(url=git_url, to_path=code_dir)
+                print (git.Repo.clone_from(url=git_url, to_path=code_dir))
                 # 重新加载代码、重启服务
                 restart_services
                 return jsonify({"result":True,"message":"clone success"})
