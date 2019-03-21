@@ -3,7 +3,7 @@
 # @File Name: webhook.py
 # @Date:   2019-03-21 20:41:23
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 21:12:42
+# @Last Modified time: 2019-03-21 21:19:40
 
 '''
 该小型Flask框架用于触发git push请求；
@@ -37,7 +37,6 @@ def pullcode():
     #    return abort(403)
     if request.method == 'POST':
         print (request.headers)
-        print(request.post.get("secret"))
         if os.path.isdir(code_dir):
             local_repo = git.Repo(code_dir)
             try:
@@ -58,4 +57,4 @@ def pullcode():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7070)
 
-#cd /home/JobCenter  && /root/.local/share/virtualenvs/JobCenter-OelQLIOn/bin/python /home/JobCenter/webhook.py >> /var/log/pullcode_JobCenter.log &
+#cd /home/JobCenter/ && nohup /root/.local/share/virtualenvs/JobCenter-OelQLIOn/bin/python /home/JobCenter/webhook.py >> /var/log/pullcode_JobCenter.log &
