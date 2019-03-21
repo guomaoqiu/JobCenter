@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 18:22:28
+# @Last Modified time: 2019-03-21 18:25:50
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -17,12 +17,12 @@ from .forms import JobDateForm,JobCronForm,JobIntervalForm
 import json as simplejson
 import requests, subprocess, json, datetime
 from datetime import date
-from app.job.views import show_jobs,job_log
+from app.job.views import show_jobs,job_logz
 from ..models import TaskLog
 from .. import scheduler
 from app.job.core import jobfromparm
 
-DEMO_ENV=False
+DEMO_ENV=True
 
 @main.route('/')
 # @login_required
