@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 11:19:50
+# @Last Modified time: 2019-03-21 14:49:54
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -32,7 +32,6 @@ def index():
         task =  show_jobs()
         return render_template('all_job_list.html',task=task)
 
-
 @main.route('/joblog')
 @login_required
 def joblog():
@@ -56,7 +55,6 @@ def dellog():
         response["msg"] = "删除失败 --- %s" % e
         response['status'] = False    
     return jsonify(response)
-
 
 @main.route('/createjob',methods=['POST','GET'])
 @login_required

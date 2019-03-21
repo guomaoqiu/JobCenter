@@ -3,7 +3,7 @@
 # @File Name: core.py
 # @Date:   2019-03-13 10:20:38
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-20 16:06:51
+# @Last Modified time: 2019-03-21 14:49:28
 
 from .public import exec_shell
 from ..models import TaskLog
@@ -11,7 +11,6 @@ from .. import db, scheduler
 
 def exe_cmd(cmd,task_id):
     '''执行CMD命令'''
- 
     with scheduler.app.app_context():
         recode, stdout = exec_shell(cmd)
         data = dict(
@@ -36,19 +35,13 @@ def exe_cmd(cmd,task_id):
         print('[Success] (%s---[%s]) success'%(cmd,task_id))
         return stdout
 
-
-import time
-def aps_test():
-    print ('执行时间：{0}'.format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) ))
-    return True
-
 def jobfromparm(scheduler,**jobargs):
     """
     "date": 是最基本的一种调度，作业任务只会执行一次。它表示特定的时间点触发。
      http://127.0.0.1:5000/v1/cron/job/add   
    {
         "id": "once6",
-        "cmd": "echo '麻痹'",
+        "cmd": "echo 'x'",
         "run_date": "2019-03-13 18:05:00",
         "trigger_type": "date"
     }
