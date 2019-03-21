@@ -210,7 +210,9 @@
     //                      }
     //                 });
     //          });
-
+    setInterval( function () {
+      t.ajax.reload(); // 刷新表格数据，分页信息不会重置
+    }, 2000 );
 </script>
 
 {% endblock %}
