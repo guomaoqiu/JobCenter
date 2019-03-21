@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-12 17:28:21
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-20 16:08:53
+# @Last Modified time: 2019-03-21 10:51:23
 
 from . import job
 from .. import scheduler
@@ -104,9 +104,7 @@ def add_job():
     except Exception as e:
         response['msg'] = str(e)
         print(e)
-
     return jsonify(response)    
-    #return json.dumps(response)
 
 @job.route('/show_jobs/', methods=['GET'])
 @login_required
@@ -192,7 +190,6 @@ def show_jobs():
 
 @job.route('/job_log', methods=['GET'])
 @login_required
-
 def job_log():
     '''获取所有job log信息'''
     response = {}

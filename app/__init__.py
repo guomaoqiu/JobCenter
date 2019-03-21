@@ -3,7 +3,7 @@
 # @File Name: __init__.py
 # @Date:   2019-03-05 18:37:34
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-19 15:52:21
+# @Last Modified time: 2019-03-21 10:53:29
 
 from flask import Flask
 from app.config import config, TaskConfig
@@ -14,11 +14,6 @@ from .main import main as main_blueprint
 from .auth import auth as auth_blueprint
 from .job import job as job_blueprint
 from flask_debugtoolbar import DebugToolbarExtension
-from flask_cors import *
-
-
-
-
 
 def create_app(config_name=None):
     if config_name is None:
@@ -27,7 +22,6 @@ def create_app(config_name=None):
     app = Flask(__name__)    
     
     app.config['SECRET_KEY'] = 'xxxxxxxxx'
-    CORS(app, supports_credentials=True)
 
     app.debug = False
     toolbar = DebugToolbarExtension()
@@ -104,12 +98,4 @@ def register_commands(app):
 
         #click.echo('Initializing the roles and permissions...')
         Role.insert_roles()
-
         click.echo('Done.')
-
-
-'''
-    // setInterval( function () {
-    //   t.ajax.reload(); // 刷新表格数据，分页信息不会重置
-    // }, 50000 );
-'''

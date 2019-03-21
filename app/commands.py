@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# @Author: guomaoqiu
+# @File Name: commands.py
+# @Date:   2019-03-15 18:29:36
+# @Last Modified by:   guomaoqiu
+# @Last Modified time: 2019-03-21 10:51:46
 import click
 
 from app import app, db

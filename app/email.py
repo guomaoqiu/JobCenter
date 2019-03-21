@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# @Author: guomaoqiu
+# @File Name: email.py
+# @Date:   2019-03-17 16:27:21
+# @Last Modified by:   guomaoqiu
+# @Last Modified time: 2019-03-21 10:52:28
 from threading import Thread
 from flask import current_app, render_template
 from flask_mail import Message

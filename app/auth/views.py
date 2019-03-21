@@ -3,8 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-19 11:59:48
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-19 16:58:48
-#-*- coding:utf-8 -*-
+# @Last Modified time: 2019-03-21 10:50:45
 
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, logout_user, login_required, \
