@@ -32,6 +32,7 @@ redis = "==2.10.6"
 flask-debugtoolbar = "*"
 flask-apscheduler = "*"
 flask-cors = "*"
+gitpython = "*"
 
 [dev-packages]
 
