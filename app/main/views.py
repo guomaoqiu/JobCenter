@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 17:44:18
+# @Last Modified time: 2019-03-21 18:21:12
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -21,6 +21,8 @@ from app.job.views import show_jobs,job_log
 from ..models import TaskLog
 from .. import scheduler
 from app.job.core import jobfromparm
+
+DEMO_ENV=Fa
 
 @main.route('/')
 # @login_required
@@ -74,6 +76,7 @@ def createjob():
     form_cron = JobCronForm()
     form_interval = JobIntervalForm()
    
+    # date job
     if form_date.submit_date.data and form_date.validate_on_submit():
         data = {
             "id": form_date.job_id.data,
@@ -84,8 +87,9 @@ def createjob():
         response = {'status': '-1'}
         try:
             data = data
-            #job_id = jobfromparm(scheduler,**data)
-            flash('定时任务 {0} 添加成功'.format(data['id']),'success')
+            if DEMO_ENV:
+                job_id = jobfromparm(scheduler,**data)
+                flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
             print(e)
@@ -103,8 +107,9 @@ def createjob():
         try:
             data = data
             print (data)
-            #job_id = jobfromparm(scheduler,**data)
-            flash('定时任务 {0} 添加成功'.format(data['id']),'success')
+            if DEMO_ENV:
+                job_id = jobfromparm(scheduler,**data)
+                flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
             print(e)
@@ -125,8 +130,9 @@ def createjob():
         try:
             data = data
             print (data)
-            #job_id = jobfromparm(scheduler,**data)
-            flash('定时任务 {0} 添加成功'.format(data['id']),'success')
+            if DEMO_ENV:
+                job_id = jobfromparm(scheduler,**data)
+                flash('定时任务 {0} 添加成功'.format(data['id']),'success')
         except Exception as e:
             response['msg'] = str(e)
             print(e)
