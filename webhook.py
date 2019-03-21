@@ -3,7 +3,7 @@
 # @File Name: webhook.py
 # @Date:   2019-03-21 20:41:23
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 21:19:40
+# @Last Modified time: 2019-03-21 21:21:42
 
 '''
 该小型Flask框架用于触发git push请求；
@@ -57,4 +57,5 @@ def pullcode():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7070)
 
+# 服务端启动命令
 #cd /home/JobCenter/ && nohup /root/.local/share/virtualenvs/JobCenter-OelQLIOn/bin/python /home/JobCenter/webhook.py >> /var/log/pullcode_JobCenter.log &
