@@ -3,7 +3,7 @@
 # @File Name: webhook.py
 # @Date:   2019-03-21 20:41:23
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 20:52:43
+# @Last Modified time: 2019-03-21 21:09:29
 
 '''
 该小型Flask框架用于触发git push请求；
@@ -53,9 +53,9 @@ def pullcode():
                 # 重新加载代码、重启服务
                 restart_services
                 return jsonify({"result":True,"message":"clone success"})
-            except Exception, e:
+            except Exception as e:
                 return jsonify({"result":False,"message": "clone faild".format(e)})
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7070)
 
-cd /home/JobCenter && pipenv shell && python /home/JobCenter/webhook.py >> /var/log/pullcode_JobCenter.log &
+cd /home/JobCenter  && /root/.local/share/virtualenvs/JobCenter-OelQLIOn/bin/python /home/JobCenter/webhook.py >> /var/log/pullcode_JobCenter.log &
