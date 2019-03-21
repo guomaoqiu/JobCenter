@@ -3,7 +3,7 @@
 # @File Name: webhook.py
 # @Date:   2019-03-21 20:41:23
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 21:21:42
+# @Last Modified time: 2019-03-21 21:25:12
 
 '''
 该小型Flask框架用于触发git push请求；
@@ -22,9 +22,6 @@ code_dir = "./"
 # 远程仓库地址
 git_url = "git@github.com:guomaoqiu/JobCenter.git"
 
-
-#白名单
-#allow_ip=[""]
 app = Flask(__name__)
 
 #restart_services = commands.getoutput("systemctl restart supervisord && echo 'restart supervisord success......'")
