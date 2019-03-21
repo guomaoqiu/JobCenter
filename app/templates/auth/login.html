@@ -24,15 +24,16 @@
                                             <h1>JobCenter!</h1>
                                             <p class="lead"> 让添加执行计划任务变得更加优雅~. </p>
                                             <p><a class="btn btn-lg btn-success" href="#" role="button">Go Go Up!</a></p>
-                                            
 
                                           </div>
                                         </div>
                                       <div class="col-md-4">
                                           {{ wtf.quick_form(form) }}
+                                          <code style="font-size: 9px">Demo环境 直接点击登录即可</code>
                                           <br>
                                           <p>忘记密码？点击<a href="{{ url_for('auth.password_reset_request') }}">这里</a>找回。</p>
                                           <p>新用户？点击<a href="{{ url_for('.register') }}">这里</a>注册。</p>
+
 
                                       </div>
                                    </div>
@@ -80,16 +81,16 @@
                 </div>
             </div>
       </div>
-<script>
-    function notice(){
-      layer.msg('Demo登录账户: admin/admin', {
-        offset: 't',
-        // time: 0, 不自动关闭
-        anim: 6,
-        icon: 6,
-      }
-      );
 
-}
-</script>
 {% endblock %}
+
+
+
+[program:jobcenter]
+command=/root/.local/share/virtualenvs/JobCenter-OelQLIOn/bin/python3 /root/.local/share/virtualenvs/JobCenter-OelQLIOn/bin/flask run -p 5009
+directory=/usr/local/weidian_collection
+stopwaitsecs=0
+autostart=true
+autorestart=true
+#stdout_logfile=/var/log/gunicorn_eat.log
+#stderr_logfile=/var/log/gunicorn_eat.error
