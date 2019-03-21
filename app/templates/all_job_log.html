@@ -85,11 +85,10 @@
         pageLength : 10, //每页显示几条数据
         lengthMenu: [5, 10, 20], //每页显示选项
         pagingType: 'full_numbers',
-        bStateSave: true,
         ajax : 'v1/cron/job/job_log',
-        ordering: true,
+        ordering: false,
         columns : [
-          {data:"id",orderable: true},
+          {data:"id",orderable: false},
           {data:"task_id",orderable: false},
           // {data:"next_run_time"},
           {data:"status",orderable: false},
