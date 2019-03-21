@@ -3,7 +3,7 @@
 # @File Name: webhook.py
 # @Date:   2019-03-21 20:41:23
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 20:44:49
+# @Last Modified time: 2019-03-21 20:45:32
 
 '''
 该小型Flask框架用于触发git push请求；
@@ -20,7 +20,7 @@ import git, os,commands
 code_dir = "./"
 
 # 远程仓库地址
-git_url = "git@github.com:guomaoqiu/devopsplatform.git"
+git_url = "git@github.com:guomaoqiu/JobCenter.git"
 
 
 #白名单
