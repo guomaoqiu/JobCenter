@@ -3,7 +3,7 @@
 # @File Name: webhook.py
 # @Date:   2019-03-21 20:41:23
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 21:09:29
+# @Last Modified time: 2019-03-21 21:10:14
 
 '''
 该小型Flask框架用于触发git push请求；
@@ -45,7 +45,7 @@ def pullcode():
                 # 重新加载代码、重启服务
                 restart_services
                 return jsonify({"result":True,"message":"pull success"})
-            except Exception,e:
+            except Exception as e:
                 return jsonify({"result":False,"message": "pull faild".format(e)})
         else:
             try:
