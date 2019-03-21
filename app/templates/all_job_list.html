@@ -114,7 +114,7 @@
                   confirmButtonColor: "#DD6B55",
                   confirmButtonText: "暂停~",
                   cancelButtonText: "我在想想吧...",
-                  closeOnConfirm: false,
+                  closeOnConfirm: true,
                   closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
                 },
                   function(isConfirm){
@@ -154,7 +154,7 @@
                   confirmButtonColor: "#DD6B55",
                   confirmButtonText: "恢复~",
                   cancelButtonText: "我在想想吧...",
-                  closeOnConfirm: false,
+                  closeOnConfirm: true,
                   closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
                 },
                   function(isConfirm){
@@ -236,8 +236,6 @@
               content: '/v1/cron/job/show_jobs?id=' + id
             });
     });
-    setInterval( function () {
-      t.ajax.reload(); // 刷新表格数据，分页信息不会重置
-    }, 5000 );
+
 </script>
 {% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}{% endblock %}
+{% block page_content %}
+<style>
+.test_box {
+    min-height: 100%;
+    max-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    outline: 0;
+    width: auto;
+    border: 1px solid #a0b3d6;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: 50px;
+    font-family: fantasy;
+    /*font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;*/
+    -webkit-user-modify: read-write-plaintext-only;
+    background-color: #161616;
+    color:green;
+}
+</style>
+
+    <script src="{{  url_for('static',filename='opsplatform/js/jquery-2.1.1.js') }}"></script>
+    <div class="row wrapper border-bottom white-bg page-heading">
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="test_box" contenteditable="true">
+								<center>
+									<h1>Welcome ~ ~ ~</h1>
+								</center>
+							</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+

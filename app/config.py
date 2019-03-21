@@ -3,7 +3,7 @@
 # @File Name: config.py
 # @Date:   2018-02-28 11:57:30
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-19 11:53:06
+# @Last Modified time: 2019-03-21 17:23:31
 import os, logging
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -18,7 +18,11 @@ mysql_info = dict(
     password = 'guo.150019'
 )
 
-
+'''
+    // setInterval( function () {
+    //   t.ajax.reload(); // 刷新表格数据，分页信息不会重置
+    // }, 5000 );
+'''
 MYSQL_URL = 'mysql+pymysql://%s:%s@%s:%s/%s?charset=utf8'%(mysql_info['username'],mysql_info['password'],
                                                            mysql_info['host'],mysql_info['port'],mysql_info['dbname'])
 

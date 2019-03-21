@@ -36,26 +36,24 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+
             {% if current_user.is_authenticated %}
-            <li><a href="{{ url_for('main.index')}}">定时任务列表</a></li>
+            <li><a href="{{ url_for('main.joblist')}}">定时任务列表</a></li>
             <li><a href="{{ url_for('main.joblog')}}">任务日志</a></li>
-      <!--       <li><a href="#">Cron任务列表</a></li>
-            <li><a href="#">Interval任务列表</a></li> -->
             <li><a href="{{url_for('main.createjob')}}">Apscheduler说明</a></li>
             <!--  仅管理员可以访问的视图  -->
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
+            <!-- <li><a href="{{ url_for('main.caidan')}}">彩蛋</a></li> -->
                 {% if current_user.is_authenticated %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b> 已登录</a>
-
                     <ul class="dropdown-menu">
                         <li><a href="{{ url_for('auth.change_password') }}">Change Password</a></li>
                         <li><a href="{{ url_for('auth.change_email_request') }}">Change Email</a></li>
                         <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
                     </ul>
-
                 </li>
                 {% else %}
                 <li><a href="{{ url_for('auth.login') }}" >登录</a></li>
@@ -100,6 +98,5 @@
 <script src="{{  url_for('static',filename='opsplatform/js/sweetalert.min.js') }}"></script>
 
 {{ super() }}
-
 {{ moment.include_moment() }}
 {% endblock %}

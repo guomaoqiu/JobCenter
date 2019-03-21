@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 17:11:48
+# @Last Modified time: 2019-03-21 17:44:18
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -30,7 +30,12 @@ def index():
         return redirect('auth/login')
     else:
         task =  show_jobs()
-        return render_template('all_job_list.html',task=task)
+        return render_template('index.html',task=task)
+@main.route('/joblist')
+@login_required
+def joblist():
+    ''' 返回job日志 '''
+    return render_template('all_job_list.html')
 
 @main.route('/joblog')
 @login_required
@@ -38,6 +43,11 @@ def joblog():
     ''' 返回job日志 '''
     return render_template('all_job_log.html')
 
+@main.route('/caidan')
+# @login_required
+def caidan():
+    ''' 返回job日志 '''
+    return render_template('others.html')
 
 @main.route('/dellog',methods=['DELETE'])
 @login_required

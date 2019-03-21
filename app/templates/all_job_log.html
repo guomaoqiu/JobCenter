@@ -32,8 +32,6 @@
                                       <a class="btn btn-xs btn-danger" id="deleteAll" title="删除">清空任务日志</a>
                                       <table id="table2_demo4" class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="table2_demo4_info">
                                           <thead>
-                                            
-
                                                   <th class="sorting_asc" rowspan="1" colspan="1" aria-label="名称">id</th>
                                                   <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="职位: activate to sort column ascending">任务ID</th>
                                                   <!-- <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="工资: activate to sort column ascending">时间</th> -->
@@ -126,7 +124,7 @@
                   confirmButtonColor: "#DD6B55",
                   confirmButtonText: "删除~",
                   cancelButtonText: "我在想想吧...",
-                  closeOnConfirm: false,
+                  closeOnConfirm: true,
                   closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
                 },
                   function(isConfirm){
@@ -170,8 +168,6 @@
               success: function(layero,index) {
                 layer.iframeAuto(index)
               }
-
-
             });
     });
     // // 删除任务按钮绑定事件
@@ -215,10 +211,6 @@
     //                 });
     //          });
 
-
-        setInterval( function () {
-      t.ajax.reload(); // 刷新表格数据，分页信息不会重置
-    }, 10000 );
 </script>
 
 {% endblock %}
