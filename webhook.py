@@ -3,7 +3,7 @@
 # @File Name: webhook.py
 # @Date:   2019-03-21 20:41:23
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 21:11:57
+# @Last Modified time: 2019-03-21 21:12:42
 
 '''
 该小型Flask框架用于触发git push请求；
@@ -15,7 +15,7 @@ ps:服务端开启了debug功能功能所以可以热加载本地提交的变更
 
 # 依赖包: pip install flask gitpython
 from flask import Flask, request, jsonify,abort
-import git, os,commands
+import git, os
 # 远程服务器代码地址
 code_dir = "./"
 
@@ -27,7 +27,7 @@ git_url = "git@github.com:guomaoqiu/JobCenter.git"
 #allow_ip=[""]
 app = Flask(__name__)
 
-restart_services = commands.getoutput("systemctl restart supervisord && echo 'restart supervisord success......'")
+#restart_services = commands.getoutput("systemctl restart supervisord && echo 'restart supervisord success......'")
 
 @app.route('/pullcode', methods=['POST'])
 def pullcode():
