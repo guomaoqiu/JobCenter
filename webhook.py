@@ -37,7 +37,6 @@ def pullcode():
     #    return abort(403)
     if request.method == 'POST':
         print (request.headers)
-        print(request.post.get("secret"))
         if os.path.isdir(code_dir):
             local_repo = git.Repo(code_dir)
             try:
