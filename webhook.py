@@ -3,7 +3,7 @@
 # @File Name: webhook.py
 # @Date:   2019-03-21 20:41:23
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 20:45:32
+# @Last Modified time: 2019-03-21 20:52:43
 
 '''
 该小型Flask框架用于触发git push请求；
@@ -36,11 +36,12 @@ def pullcode():
     #if request.headers.get('X-Forwarded-For', request.remote_addr) not in allow_ip:
     #    return abort(403)
     if request.method == 'POST':
-        print request.headers
+        print (request.headers)
+        print(request.post.get("secret"))
         if os.path.isdir(code_dir):
             local_repo = git.Repo(code_dir)
             try:
-                print local_repo.git.pull()
+                print (local_repo.git.pull())
                 # 重新加载代码、重启服务
                 restart_services
                 return jsonify({"result":True,"message":"pull success"})
@@ -56,3 +57,5 @@ def pullcode():
                 return jsonify({"result":False,"message": "clone faild".format(e)})
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7070)
+
+cd /home/JobCenter && pipenv shell && python /home/JobCenter/webhook.py >> /var/log/pullcode_JobCenter.log &
