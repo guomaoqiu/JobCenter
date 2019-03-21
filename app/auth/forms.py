@@ -3,7 +3,7 @@
 # @File Name: forms.py
 # @Date:   2019-03-14 09:51:08
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 14:48:34
+# @Last Modified time: 2019-03-21 22:16:52
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import Required, Length, Email, Regexp, EqualTo
@@ -11,9 +11,9 @@ from wtforms import ValidationError
 from ..models import User
 
 class LoginForm(FlaskForm):
-    email = StringField('邮箱', validators=[Required(), Length(1, 64),
+    email = StringField('邮箱', default="2399447849@qq.com", validators=[Required(), Length(1, 64),
                                              Email()])
-    password = PasswordField('密码', validators=[Required()])
+    password = StringField('密码', default="123.com", validators=[Required()])
     remember_me = BooleanField('保持登录')
     submit = SubmitField('登录')
 
