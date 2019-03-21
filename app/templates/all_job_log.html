@@ -80,7 +80,7 @@
   
 
     $("#table2_demo4").dataTable({
-        autoWidth: true,
+        autoWidth: false,
         lengthChange: true, //不允许用户改变表格每页显示的记录数
         pageLength : 10, //每页显示几条数据
         lengthMenu: [5, 10, 20], //每页显示选项
@@ -160,10 +160,18 @@
             layer.open({
               type: 2 ,
               skin: 'layui-layer-demo', //样式类名
-              closeBtn: 0, //不显示关闭按钮
+              closeBtn: 1, //不显示关闭按钮
+              title: "Stdout",
               anim: 2,
+              area: '800px',
+              shade: [0.8, '#393D49'],
               shadeClose: true, //开启遮罩关闭
-              content: '/v1/cron/job/job_log?id=' + id
+              content: '/stdout/' +  id,
+              success: function(layero,index) {
+                layer.iframeAuto(index)
+              }
+
+
             });
     });
     // // 删除任务按钮绑定事件
