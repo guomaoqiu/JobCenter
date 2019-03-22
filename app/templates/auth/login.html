@@ -24,7 +24,7 @@
                                             <h1>JobCenter!</h1>
                                             <p class="lead"> 让添加执行计划任务变得更加优雅~. </p>
                                             <p><a class="btn btn-lg btn-success" href="#" role="button">Go Go Up!</a></p>
-
+                                            <h5>请使用<code>Chrome</code>浏览器进行访问😁</h5>
                                           </div>
                                         </div>
                                       <div class="col-md-4">
@@ -88,9 +88,9 @@
 
 [program:jobcenter]
 command=/root/.local/share/virtualenvs/JobCenter-OelQLIOn/bin/python3 /root/.local/share/virtualenvs/JobCenter-OelQLIOn/bin/flask run -p 5009
-directory=/usr/local/weidian_collection
+directory=/home/JobCenter
 stopwaitsecs=0
 autostart=true
 autorestart=true
-#stdout_logfile=/var/log/gunicorn_eat.log
-#stderr_logfile=/var/log/gunicorn_eat.error
+#stdout_logfile=/var/log/gunicorn_jobcenter.log
+#stderr_logfile=/var/log/gunicorn_jobcenter.error
