@@ -3,13 +3,13 @@
 # @File Name: webhook.py
 # @Date:   2019-03-21 20:41:23
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 21:25:12
+# @Last Modified time: 2019-03-22 14:31:36
 
 '''
 该小型Flask框架用于触发git push请求；
 当本地代码提交后，通过设置的webhook功能触发该脚本
 从而触发服务器仓库上面的代码执行git pull操作
-以次达到自动热部署的目的
+以此达到自动热部署的目的
 ps:服务端开启了debug功能功能所以可以热加载本地提交的变更操作。
 '''
 
@@ -24,7 +24,6 @@ git_url = "git@github.com:guomaoqiu/JobCenter.git"
 
 app = Flask(__name__)
 
-#restart_services = commands.getoutput("systemctl restart supervisord && echo 'restart supervisord success......'")
 
 @app.route('/pullcode', methods=['POST'])
 def pullcode():
