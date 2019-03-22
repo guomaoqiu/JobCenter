@@ -35,7 +35,7 @@
             {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('main.joblist')}}">定时任务列表</a></li>
             <li><a href="{{ url_for('main.joblog')}}">任务日志</a></li>
-            <li><a href="{{url_for('main.createjob')}}">创建Apscheduler作业任务</a></li>
+            <li><a href="{{url_for('main.createjob')}}">添加Apscheduler作业任务</a></li>
             <!--  仅管理员可以访问的视图  -->
                 {% endif %}
             </ul>
