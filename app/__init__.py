@@ -3,7 +3,7 @@
 # @File Name: __init__.py
 # @Date:   2019-03-05 18:37:34
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 10:53:29
+# @Last Modified time: 2019-03-25 11:47:15
 
 from flask import Flask
 from app.config import config, TaskConfig
@@ -23,7 +23,7 @@ def create_app(config_name=None):
     
     app.config['SECRET_KEY'] = 'xxxxxxxxx'
 
-    app.debug = False
+    app.debug = True
     toolbar = DebugToolbarExtension()
     toolbar.init_app(app)
 
