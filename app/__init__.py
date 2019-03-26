@@ -3,7 +3,7 @@
 # @File Name: __init__.py
 # @Date:   2019-03-05 18:37:34
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-25 11:47:15
+# @Last Modified time: 2019-03-26 18:05:07
 
 from flask import Flask
 from app.config import config, TaskConfig
@@ -17,8 +17,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 def create_app(config_name=None):
     if config_name is None:
-        config_name = os.getenv('FLASK_CONFIG', 'development')
-        
+        config_name = os.getenv('FLASK_CONFIG', 'default')
+  
     app = Flask(__name__)    
     
     app.config['SECRET_KEY'] = 'xxxxxxxxx'

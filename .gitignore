@@ -1,12 +1,13 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-  
+
 # C extensions
 *.so
 *.db
 # Distribution / packaging
 .Python
+.flaskenv
 env/
 build/
 develop-eggs/
