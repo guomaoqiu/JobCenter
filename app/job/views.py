@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-12 17:28:21
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-26 16:18:51
+# @Last Modified time: 2019-03-26 16:30:03
 
 from . import job
 from .. import scheduler
@@ -137,9 +137,9 @@ def show_jobs():
                     'next_run_time':ret.next_run_time,
                     'cmd':ret.kwargs.get('cmd'),
                     'func':ret.func_ref,
-                    'status':"<p style='background-color:#46c37b;color:black;padding:3px 5px;border-radius:5px;font-weight:bold'>Runing...</p>" \
+                    'status':"<p style='background-color:#46c37b;color:snow;padding:3px 5px;border-radius:5px;font-weight:bold'>Runing...</p>" \
                              if ret.next_run_time != None else \
-                             "<p style='background-color:#f0a63a;color:black;padding:3px 5px;border-radius:5px;font-weight:bold'>Pause...</p>",
+                             "<p style='background-color:#f0a63a;color:snow;padding:3px 5px;border-radius:5px;font-weight:bold'>Pause...</p>",
                     'cron':' '.join(cron_list)
                 }
                 info_list.append(info)  
@@ -153,9 +153,9 @@ def show_jobs():
                     'next_run_time':ret.next_run_time,
                     'cmd':ret.kwargs.get('cmd'),
                     'func':ret.func_ref,
-                    'status':"<p style='background-color:#46c37b;color:black;padding:3px 5px;border-radius:5px;font-weight:bold'>Runing...</p>" \
+                    'status':"<p style='background-color:#46c37b;color:snow;padding:3px 5px;border-radius:5px;font-weight:bold'>Runing...</p>" \
                              if ret.next_run_time != None else \
-                             "<p style='background-color:#f0a63a;color:black;padding:3px 5px;border-radius:5px;font-weight:bold'>Pause...</p>",
+                             "<p style='background-color:#f0a63a;color:snow;padding:3px 5px;border-radius:5px;font-weight:bold'>Pause...</p>",
                     'cron': ret.trigger.run_date
                 }
                 info_list.append(info)
@@ -171,9 +171,9 @@ def show_jobs():
                     'next_run_time':ret.next_run_time,
                     'cmd':ret.kwargs.get('cmd'),
                     'func':ret.func_ref,
-                    'status':"<p style='background-color:#46c37b;color:black;padding:3px 5px;border-radius:5px;font-weight:bold'>Runing...</p>" \
+                    'status':"<p style='background-color:#46c37b;color:snow;padding:3px 5px;border-radius:5px;font-weight:bold'>Runing...</p>" \
                              if ret.next_run_time != None else \
-                             "<p style='background-color:#f0a63a;color:black;padding:3px 5px;border-radius:5px;font-weight:bold'>Pause...</p>",
+                             "<p style='background-color:#f0a63a;color:snow;padding:3px 5px;border-radius:5px;font-weight:bold'>Pause...</p>",
                     'cron': str(ret.trigger.interval_length) + "s / run"
                 }
                 info_list.append(info)
