@@ -3,7 +3,7 @@
 # @File Name: core.py
 # @Date:   2019-03-13 10:20:38
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-26 10:32:42
+# @Last Modified time: 2019-03-26 10:33:11
 
 from .public import exec_shell
 from ..models import TaskLog
@@ -98,7 +98,7 @@ def jobfromparm(scheduler,**jobargs):
 def get_job_logs(args):
     jid = args.get('id')
     pageNum = int(args.get('pageNum',1))
-    pageSize = int(args.get('pageSize',25))
+    pageSize = int(args.get('pageSize',50))
     if jid == None:
         data_list = TaskLog.query.order_by(TaskLog.id.desc()).paginate(
             pageNum, pageSize, error_out=False
