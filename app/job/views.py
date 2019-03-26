@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-12 17:28:21
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-25 12:11:04
+# @Last Modified time: 2019-03-26 16:03:25
 
 from . import job
 from .. import scheduler
@@ -137,7 +137,7 @@ def show_jobs():
                     'next_run_time':ret.next_run_time,
                     'cmd':ret.kwargs.get('cmd'),
                     'func':ret.func_ref,
-                    'status':'运行中...' if ret.next_run_time != None else '暂停中...',
+                    'status':"<p style='background-color:green;color:snow'>运行中...</p>" if ret.next_run_time != None else "<p style='background-color:red;color:snow'>暂停中...</p>",
                     'cron':' '.join(cron_list)
                 }
                 info_list.append(info)  
@@ -151,7 +151,7 @@ def show_jobs():
                     'next_run_time':ret.next_run_time,
                     'cmd':ret.kwargs.get('cmd'),
                     'func':ret.func_ref,
-                    'status':'运行中...' if ret.next_run_time != None else '暂停中...',
+                    'status':"<p style='background-color:green;color:snow'>运行中...</p>" if ret.next_run_time != None else "<p style='background-color:red;color:snow'>暂停中...</p>",
                     'cron': ret.trigger.run_date
                 }
                 info_list.append(info)
@@ -167,7 +167,7 @@ def show_jobs():
                     'next_run_time':ret.next_run_time,
                     'cmd':ret.kwargs.get('cmd'),
                     'func':ret.func_ref,
-                    'status':'运行中...' if ret.next_run_time != None else '暂停中...',
+                    'status':"<p style='background-color:green;color:snow'>运行中...</p>" if ret.next_run_time != None else "<p style='background-color:red;color:snow'>暂停中...</p>",
                     'cron': str(ret.trigger.interval_length) + "s / run"
                 }
                 info_list.append(info)
