@@ -3,7 +3,7 @@
 # @File Name: config.py
 # @Date:   2018-02-28 11:57:30
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 17:23:31
+# @Last Modified time: 2019-03-26 18:04:10
 import os, logging
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -94,22 +94,22 @@ class Config:
         pass
 
 class DevelopmentConfig(Config):
-    DEBUG = False
+    DEMO_ENV=False
     SQLALCHEMY_DATABASE_URI = MYSQL_URL
 
     #SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://' + db_user + ':' + db_pass + '@' + db_host + '/' + db_name + '?charset=utf8mb4'
 
-
-
 class TestingConfig(Config):
     pass
 
-class Production(Config):
-    pass
+class ProductionConfig(Config):
+    DEMO_ENV=True
+    SQLALCHEMY_DATABASE_URI = MYSQL_URL
+    # DEMO_ENV=False
 
 config = {
     'development': DevelopmentConfig,
     'testing': TestingConfig,
-    'production': Production,
+    'production': ProductionConfig,
     'default': DevelopmentConfig
 }
