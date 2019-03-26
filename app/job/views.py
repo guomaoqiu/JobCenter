@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-12 17:28:21
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 10:51:23
+# @Last Modified time: 2019-03-25 12:11:04
 
 from . import job
 from .. import scheduler
@@ -143,7 +143,6 @@ def show_jobs():
                 info_list.append(info)  
 
 
-
             # 判断任务类型是否为 date    
             if "date" in str(ret.trigger):
                 info = {
@@ -176,14 +175,9 @@ def show_jobs():
         response['status'] = True
         response['data'] = info_list
         response['count'] = len(info_list)
-        #print(info_list)
-
-        #for i in ret_list:
-        #    print(i,'xxxx')
+       
     except Exception as e:
         response['msg'] = str(e)
-    # result = json.dumps(response,cls=DateEncoder)
-    #result = Response(json.dumps(response,cls=DateEncoder),mimetype='application/json' )
     result = json.dumps(response,cls=DateEncoder)
 
     return result
@@ -201,10 +195,10 @@ def job_log():
             return jsonify({"stdout": ret})
         else:    
             ret = get_job_logs(request.args)
-
         response['status'] = 0
         response['data'] = ret
         response['count'] = len(ret)
     except Exception as e:
         response['msg'] = str(e)
+
     return json.dumps(response,cls=DateEncoder)

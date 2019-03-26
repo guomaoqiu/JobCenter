@@ -3,10 +3,10 @@
 # @File Name: webhook.py
 # @Date:   2019-03-21 20:41:23
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-22 15:26:10
+# @Last Modified time: 2019-03-22 18:38:18
 
 '''
-该小型Flask框架用于触发git push请求；
+该脚本用于启动一个小web服务用于接收触发本地开发环境的代码push请求；
 当本地代码提交后，通过设置的webhook功能触发该脚本
 从而触发服务器仓库上面的代码执行git pull操作
 以此达到自动热部署的目的
