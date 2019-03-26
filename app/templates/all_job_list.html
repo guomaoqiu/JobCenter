@@ -85,7 +85,7 @@
             data:null,
             orderable:false,
             render : function(data, type, row, meta){
-                return "<a class='btn btn-sm btn-danger del'>删除</a>  <a class='btn btn-sm btn-info job_infox'>编辑</a>  <a class='btn btn-sm btn-warning pause_job'>暂停</a> <a class='btn btn-sm btn-success resume_job'>恢复</a>"
+                return "<a class='btn btn-sm btn-danger del'>删除</a>  <a class='btn btn-sm btn-info job_infox'>编辑</a>  <a class='btn btn-sm btn-warning pause_job'>暂停</a> <a class='btn btn-sm btn-success resume_job'><i class='ivu-icon ivu-icon-md-play'></i>恢复</a>"
             }
           }
 
@@ -95,7 +95,7 @@
   
 
     });
-
+// <button type="button" class="ivu-btn ivu-btn-success ivu-btn-small" style="margin-right: 5px;"><!----> <i class="ivu-icon ivu-icon-md-play"></i> <span>恢复执行</span></button>
     //=============================================================================== action.js
     //======== 公共使用:
     var t = $("#table2_demo4").DataTable();//获取datatables对象
