@@ -8,7 +8,9 @@
 * 作业任务持久化存储、三种不同触发器类型作业动态添加
 
 Demo: [http://jobcenter.sctux.com](http://jobcenter.sctux.com/)
+
 2399447849@qq.com / 123.com
+
 (注: demo版本部分功能已禁用🍺)
 
 # 用法:
