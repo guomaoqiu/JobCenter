@@ -7,10 +7,10 @@
 * 作业任务可搜索、暂停、编辑、删除
 * 作业任务持久化存储、三种不同触发器类型作业动态添加
 
-Demo: [http://jobcenter.sctux.com](http://jobcenter.sctux.com/)
-
-2399447849@qq.com / 123.com
-
+Demo:
+<a href="http://jobcenter.sctux.com/" target="_blank">
+  <img src="https://img.alicdn.com/tfs/TB12GX6zW6qK1RjSZFmXXX0PFXa-744-122.png" width="180" />
+</a>
 (注: demo版本部分功能已禁用🍺)
 
 # 用法:
