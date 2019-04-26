@@ -3,7 +3,7 @@
 # @File Name: config.py
 # @Date:   2018-02-28 11:57:30
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-26 18:04:10
+# @Last Modified time: 2019-03-31 14:13:24
 import os, logging
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -34,7 +34,7 @@ class TaskConfig(object):
         'default': SQLAlchemyJobStore(url=MYSQL_URL)
     }
     SCHEDULER_EXECUTORS = {
-        'default': {'type': 'threadpool', 'max_workers': 20}
+        # 'default': {'type': 'threadpool', 'max_workers': 20}
     }
     SCHEDULER_JOB_DEFAULTS = {
         'coalesce': False,
@@ -94,7 +94,7 @@ class Config:
         pass
 
 class DevelopmentConfig(Config):
-    DEMO_ENV=False
+    #DEMO_ENV=False
     SQLALCHEMY_DATABASE_URI = MYSQL_URL
 
     #SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://' + db_user + ':' + db_pass + '@' + db_host + '/' + db_name + '?charset=utf8mb4'
