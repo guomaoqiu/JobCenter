@@ -94,16 +94,15 @@ class Config:
         pass
 
 class DevelopmentConfig(Config):
-    DEMO_ENV=False
     SQLALCHEMY_DATABASE_URI = MYSQL_URL
 
+    DEMO_ENV=True
     #SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://' + db_user + ':' + db_pass + '@' + db_host + '/' + db_name + '?charset=utf8mb4'
 
 class TestingConfig(Config):
     pass
 
 class ProductionConfig(Config):
-    DEMO_ENV=True
     SQLALCHEMY_DATABASE_URI = MYSQL_URL
     # DEMO_ENV=False
 

@@ -23,7 +23,7 @@ from .. import scheduler
 from app.job.core import jobfromparm
 
 #demo环境切换
-DEMO_ENV=False
+#DEMO_ENV=False
 
 @main.route('/')
 # @login_required
@@ -111,7 +111,9 @@ def createjob():
         try:
             data = data
             print (data)
+            print (DEMO_ENV)
             if DEMO_ENV:
+                          
                 job_id = jobfromparm(scheduler,**data)
                 flash('定时任务 {0} 添加成功'.format(data['id']),'success')
             else:
