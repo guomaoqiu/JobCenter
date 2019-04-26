@@ -3,7 +3,7 @@
 # @File Name: config.py
 # @Date:   2018-02-28 11:57:30
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-26 18:04:10
+# @Last Modified time: 2019-04-26 21:20:28
 import os, logging
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -34,7 +34,7 @@ class TaskConfig(object):
         'default': SQLAlchemyJobStore(url=MYSQL_URL)
     }
     SCHEDULER_EXECUTORS = {
-        'default': {'type': 'threadpool', 'max_workers': 20}
+        # 'default': {'type': 'threadpool', 'max_workers': 20}
     }
     SCHEDULER_JOB_DEFAULTS = {
         'coalesce': False,
@@ -84,6 +84,8 @@ class Config:
     #加密解密所需的key
     PRPCRYPTO_KEY= '2d4g53sdfs6L6K'
 
+    # demo环境切换
+    DEMO_ENV=True
 
 
     # 配置类可以定义 init_app() 类方法，其参数是程序实例。

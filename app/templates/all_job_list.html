@@ -85,7 +85,7 @@
             data:null,
             orderable:false,
             render : function(data, type, row, meta){
-                return "<a class='btn btn-sm btn-danger del'>删除</a>  <a class='btn btn-sm btn-info job_infox'>编辑</a>  <a class='btn btn-sm btn-warning pause_job'>暂停</a> <a class='btn btn-sm btn-success resume_job'><i class='ivu-icon ivu-icon-md-play'></i>恢复</a>"
+                return "<a class='btn btn-sm btn-danger del'>删除</a>  <a class='btn btn-sm btn-info edit'>编辑</a>  <a class='btn btn-sm btn-warning pause_job'>暂停</a> <a class='btn btn-sm btn-success resume_job'><i class='ivu-icon ivu-icon-md-play'></i>恢复</a>"
             }
           }
 
@@ -239,5 +239,24 @@
     setInterval( function () {
       t.ajax.reload(); // 刷新表格数据，分页信息不会重置
     }, 2000 );
+
+
+    $("#table2_demo4 tbody").on('click', 'a.edit', function(){
+            var data = t.row( $(this).parents('tr') ).data();
+            console.log(data)
+            var fields = $("#add-form").serializeArray();
+            // jQuery.each( fields, function(i, field){
+            //     //jquery根据name属性查找
+            //     $(":input[name='"+field.name+"']").val(data[i]);
+            // });
+            // $(":input[name='mark']").val("edit");
+            // $("#modal-form").modal("show");//弹出框show
+            
+        });
+
+
+
+
+
 </script>
 {% endblock %}
