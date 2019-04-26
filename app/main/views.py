@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-04-26 21:23:27
+# @Last Modified time: 2019-04-26 21:24:15
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -23,7 +23,7 @@ from .. import scheduler
 from app.job.core import jobfromparm
 
 #demo环境切换
-DEMO_ENV=True
+DEMO_ENV=False
 
 @main.route('/')
 # @login_required
