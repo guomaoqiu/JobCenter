@@ -22,12 +22,6 @@ from ..models import TaskLog
 from .. import scheduler
 from app.job.core import jobfromparm
 
-<<<<<<< HEAD
-#demo环境切换
-#DEMO_ENV=False
-=======
-
->>>>>>> b601e8aa8d2efcb286bca202c7fe70c9c7bb34aa
 
 @main.route('/')
 # @login_required
