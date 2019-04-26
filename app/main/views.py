@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-04-26 21:20:00
+# @Last Modified time: 2019-04-26 21:23:27
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -22,6 +22,8 @@ from ..models import TaskLog
 from .. import scheduler
 from app.job.core import jobfromparm
 
+#demo环境切换
+DEMO_ENV=True
 
 @main.route('/')
 # @login_required
@@ -109,9 +111,7 @@ def createjob():
         try:
             data = data
             print (data)
-            print (DEMO_ENV)
             if DEMO_ENV:
-                          
                 job_id = jobfromparm(scheduler,**data)
                 flash('定时任务 {0} 添加成功'.format(data['id']),'success')
             else:
