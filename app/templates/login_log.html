@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block page_content %}
+<script src="{{  url_for('static',filename='opsplatform/js/jquery-2.1.1.js') }}"></script>
+<link href="https://magicbox.bk.tencent.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://magicbox.bk.tencent.com/static_api/v3/assets/datatables-1.10.7/dataTables.bootstrap.css" rel="stylesheet"/>
+<script src="https://magicbox.bk.tencent.com/static_api/v3/assets/js/jquery-1.10.2.min.js"></script>
+<script src="https://magicbox.bk.tencent.com/static_api/v3/assets/datatables-1.10.7/jquery.dataTables.js"></script>
+<script src="https://magicbox.bk.tencent.com/static_api/v3/assets/datatables-1.10.7/dataTables.bootstrap.js"></script>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li class="active">
+                    <strong>😁</strong><br>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="panel-content">
+                          <table id="table2_demo4" class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="table2_demo4_info">
+                              <thead>
+                         			<th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="可执行命令: activate to sort column ascending">ID</th>
+                                      <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="可执行命令: activate to sort column ascending">IP</th>
+                                      <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="状态: activate to sort column ascending">登录浏览器</th>
+                                      <th class="sorting" tabindex="0" aria-controls="table2_demo4" rowspan="1" colspan="1" aria-label="计划时间: activate to sort column ascending">登录时间</th>
+                              
+                              </thead>
+                              <tbody>
+                              	{% for each_data in data %}
+                              	<tr>
+                              	  <td>{{ loop.index }}</td>	
+                              	  <td>{{ each_data['login_ip'] }}</td>
+                              	  <td>{{ each_data['login_time'] }}</td>
+                              	  <td>{{ each_data['login_browser'] }}</td>
+                              	
+                              	<tr>
+                              		{% endfor %}
+                              </tbody>
+                          </table>
+                            <div class="col-md-4">
+                              
+
+                            </div>
+                            <div class="col-lg-8"></div>
+                          </div>
+                      </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

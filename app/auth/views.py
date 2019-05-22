@@ -3,17 +3,18 @@
 # @File Name: views.py
 # @Date:   2019-03-19 11:59:48
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-21 22:16:34
+# @Last Modified time: 2019-05-15 16:50:44
 
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, logout_user, login_required, \
     current_user
 from . import auth
 from .. import db
-from ..models import User
+from ..models import User,LoginLog
 from ..email import send_email
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm,\
     PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm
+import time
 
 @auth.before_app_request
 def before_request():
@@ -38,6 +39,19 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password("123.com"):
             login_user(user, form.remember_me.data)
+            print (request.headers.get('X-Forwarded-For',request.remote_addr))
+            login_log = LoginLog()
+            login_log.login_ip = request.headers.get('X-Forwarded-For',request.remote_addr)
+            login_log.login_browser = str(request.user_agent)
+            login_log.login_time = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+
+            #print (login_log)
+            print(login_log.login_ip,login_log.login_browser,login_log.login_time)
+  
+            db.session.add(login_log) # 提交
+            db.session.commit()
+
+            
             return redirect(request.args.get('next') or url_for('main.index'))
         flash('Invalid username or password.','danger')
     return render_template('auth/login.html', form=form)

@@ -185,41 +185,41 @@
     $("#table2_demo4 tbody").on('click', 'a.del', function(){
         var row = t.row( $(this).parents('tr') ),//获取按钮所在的行
           data = row.data();
-          // alert(data.id)
-                  swal({
-                  title: "是否确定删除任务: " + data.id,
-                  text: "操作不规范，运维两行泪",
-                  type: "warning",
-                  showCancelButton: true,
-                  showLoaderOnConfirm: true,
-                  confirmButtonColor: "#DD6B55",
-                  confirmButtonText: "删除~",
-                  cancelButtonText: "我在想想吧...",
-                  closeOnConfirm: true,
-                  closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
-                },
-                  function(isConfirm){
-                      if (isConfirm) {
-                        $.ajax ({
-                                type:'DELETE',
-                                url:"/v1/cron/job/remove",
-                                contentType:'application/json',
-                                datatype: "json",
-                                data: JSON.stringify({"id": data.id}),
+                //   swal({
+                //   title: "是否确定删除任务: " + data.id,
+                //   text: "操作不规范，运维两行泪",
+                //   type: "warning",
+                //   showCancelButton: true,
+                //   showLoaderOnConfirm: true,
+                //   confirmButtonColor: "#DD6B55",
+                //   confirmButtonText: "删除~",
+                //   cancelButtonText: "我在想想吧...",
+                //   closeOnConfirm: true,
+                //   closeOnCancel: true  //关闭取消后还弹出让你确认的效果提示
+                // },
+                //   function(isConfirm){
+                //       if (isConfirm) {
+                //         $.ajax ({
+                //                 type:'DELETE',
+                //                 url:"/v1/cron/job/remove",
+                //                 contentType:'application/json',
+                //                 datatype: "json",
+                //                 data: JSON.stringify({"id": data.id}),
 
-                                success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
-                                    console.log(res)
-                                    if (res.status) {
-                                        swal(res.msg, "", "success");
-                                        row.remove().draw();
-                                    }
-                                    else {
-                                        swal(res.msg, "", "error");
-                                    }
-                                }
-                            });
-                         }
-                    });
+                //                 success:function(res){   //将处理的结果进行判断，根据执行失败，成功现实的提示不同的内容
+                //                     console.log(res)
+                //                     if (res.status) {
+                //                         swal(res.msg, "", "success");
+                //                         row.remove().draw();
+                //                     }
+                //                     else {
+                //                         swal(res.msg, "", "error");
+                //                     }
+                //                 }
+                //             });
+                //          }
+                //     });
+                layer.msg('Demo环境，暂时无法删除.')
              });
    
     //详情按钮绑定事件

@@ -3,7 +3,7 @@
 # @File Name: models.py
 # @Date:   2019-03-12 16:43:26
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-25 11:46:49
+# @Last Modified time: 2019-05-15 17:08:40
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
@@ -207,5 +207,22 @@ class TaskLog(db.Model):
             'exe_time': self.exe_time,
             'cmd': self.cmd,
             'stdout': self.stdout
+        }
+        return json_post
+
+class LoginLog(db.Model):
+    __tablename__ = 'login_log'
+    id = db.Column(db.Integer, primary_key=True)
+    login_ip = db.Column(db.String(16))
+    login_browser = db.Column(db.String(200))
+    login_time = db.Column(db.DateTime, default=datetime.now)
+    
+
+    def to_json(self):
+        json_post = {
+            'id': self.id,
+            'login_ip': self.login_ip,
+            'login_browser': self.login_browser,
+            'login_time': self.login_time,
         }
         return json_post

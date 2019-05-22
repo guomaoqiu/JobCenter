@@ -3,14 +3,14 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-04-26 21:24:15
+# @Last Modified time: 2019-05-22 17:30:35
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
 from sqlalchemy import desc
 from .. import db
 from flask_login import login_user, logout_user, login_required,current_user
-from ..models import User, Weidian
+from ..models import User, Weidian, LoginLog
 import os,json,time
 from ..email import send_email
 from .forms import JobDateForm,JobCronForm,JobIntervalForm
@@ -23,7 +23,7 @@ from .. import scheduler
 from app.job.core import jobfromparm
 
 #demo环境切换
-DEMO_ENV=False
+DEMO_ENV=True
 
 @main.route('/')
 # @login_required
@@ -153,3 +153,14 @@ def stdout(id):
     result = db.session.query(TaskLog).filter_by(id=id).first()
     stdout = result.to_json()['stdout']
     return render_template('stdout.html',stdout=stdout)
+
+@main.route('/loginlog')
+
+def loginlog():
+    data = []
+    data_list = LoginLog.query.all()
+    for i in data_list:
+        data.append(i.to_json())
+    for s in data:
+        print (s['id'])
+    return render_template('login_log.html',data=data)
