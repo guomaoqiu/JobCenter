@@ -40,7 +40,7 @@ def login():
         if user is not None and user.verify_password("123.com"):
             login_user(user, form.remember_me.data)
             print (request.headers.get('X-Forwarded-For',request.remote_addr))
-            login_log = LoginLog()
+#            login_log = LoginLog()
             login_log.login_ip = request.headers.get('X-Forwarded-For',request.remote_addr)
             login_log.login_browser = str(request.user_agent)
             login_log.login_time = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
