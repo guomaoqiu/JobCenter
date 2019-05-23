@@ -41,15 +41,15 @@ def login():
             login_user(user, form.remember_me.data)
             print (request.headers.get('X-Forwarded-For',request.remote_addr))
 #            login_log = LoginLog()
-            login_log.login_ip = request.headers.get('X-Forwarded-For',request.remote_addr)
-            login_log.login_browser = str(request.user_agent)
-            login_log.login_time = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+#            login_log.login_ip = request.headers.get('X-Forwarded-For',request.remote_addr)
+#            login_log.login_browser = str(request.user_agent)
+#            login_log.login_time = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
 
             #print (login_log)
-            print(login_log.login_ip,login_log.login_browser,login_log.login_time)
+ #           print(login_log.login_ip,login_log.login_browser,login_log.login_time)
   
-            db.session.add(login_log) # 提交
-            db.session.commit()
+ #           db.session.add(login_log) # 提交
+ #           db.session.commit()
 
             
             return redirect(request.args.get('next') or url_for('main.index'))
