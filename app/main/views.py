@@ -38,7 +38,7 @@ def index():
 @main.route('/joblist')
 @login_required
 def joblist():
-    ''' 返回作业任务李彪 '''
+    ''' 返回作业任务列表 '''
     return render_template('all_job_list.html')
 
 @main.route('/joblog')
