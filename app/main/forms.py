@@ -3,7 +3,7 @@
 # @File Name: forms.py
 # @Date:   2019-03-07 17:20:38
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2019-03-20 17:32:58
+# @Last Modified time: 2019-05-31 18:12:54
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField,TextAreaField,SelectField
@@ -36,3 +36,4 @@ class JobIntervalForm(FlaskForm):
     #start_date = StringField('star_time(例如:2019-03-20 11:11:11)')
     #end_date = StringField('end_time')
     submit_interval = SubmitField('确认添加')    
+
