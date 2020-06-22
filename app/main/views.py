@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2020-06-23 00:59:20
+# @Last Modified time: 2020-06-23 01:00:27
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -26,7 +26,7 @@ from app.dingding import dingding
 DEMO_ENV=False
 
 @main.route('/dingding',methods=['POST'])
-def dingding(pay_method):
+def dingding():
     # USDT 充值通知
     if request.method == "POST":
         pay_method = json.loads(request.form.get('data'))['pay_methods']
