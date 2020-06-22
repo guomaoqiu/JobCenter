@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2020-06-23 01:02:42
+# @Last Modified time: 2020-06-23 01:05:46
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -21,7 +21,7 @@ from app.job.views import show_jobs,job_log
 from ..models import TaskLog
 from .. import scheduler
 from app.job.core import jobfromparm
-from app.dingding import dingding
+from ..dingding import dingding
 #demo环境切换
 DEMO_ENV=False
 
@@ -36,6 +36,7 @@ def dingding():
             "agent": str(request.user_agent),
             "title": "***[{0}支付通知***[MSG]".format( pay_method)
         }
+        dingding(dingding_send_info)
         try:
             dingding(dingding_send_info)
             return jsonify({"result":True, "message":"OK, 您的付款信息已經通知客服小姐姐啦~.\n30分鐘內為您開通VIP~"})
