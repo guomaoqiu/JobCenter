@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <button onclick="fetchLocation()">tt</button>
+    <script>
+        var tipsEle = document.getElementById('tips')
+        function fetchLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError)
+            } else {
+                alert('当前设备不支持定位！')
+            }
+        }
+        function onGeoSuccess(event){
+            alert("Success: " + event.coords.latitude + ", " + event.coords.longitude)
+        }
+        function onGeoError(event){
+            alert("Error code " + event.code + ". " + event.message)
+        }
+    </script>
+</body>

