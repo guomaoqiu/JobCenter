@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2020-06-23 00:58:07
+# @Last Modified time: 2020-06-23 00:59:20
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -26,19 +26,23 @@ from app.dingding import dingding
 DEMO_ENV=False
 
 @main.route('/dingding',methods=['POST'])
-def dingding():
-    dingding_send_info = {
-        "address": request.headers.get('X-Forwarded-For',request.remote_addr) ,
-        "agent": str(request.user_agent),
-        "title": "***[{0}支付通知***[MSG]".format( pay_method)
-    }
-    dingding(dingding_send_info)
-    try:
+def dingding(pay_method):
+    # USDT 充值通知
+    if request.method == "POST":
+        pay_method = json.loads(request.form.get('data'))['pay_methods']
+
+        dingding_send_info = {
+            "address": request.headers.get('X-Forwarded-For',request.remote_addr) ,
+            "agent": str(request.user_agent),
+            "title": "***[{0}支付通知***[MSG]".format( pay_method)
+        }
         dingding(dingding_send_info)
-        return jsonify({"result":True, "message":"OK, 您的付款信息已經通知客服小姐姐啦~.\n30分鐘內為您開通VIP~"})
-    except Exception as why:
-        print("*** 支付完成後的通知失敗 ***", why)
-        return jsonify({"result":False, "message":"x"})
+        try:
+            dingding(dingding_send_info)
+            return jsonify({"result":True, "message":"OK, 您的付款信息已經通知客服小姐姐啦~.\n30分鐘內為您開通VIP~"})
+        except Exception as why:
+            print("*** 支付完成後的通知失敗 ***", why)
+            return jsonify({"result":False, "message":"x"})
 
 @main.route('/')
 # @login_required
