@@ -3,7 +3,7 @@
 # @File Name: views.py
 # @Date:   2019-03-13 10:07:12
 # @Last Modified by:   guomaoqiu
-# @Last Modified time: 2020-06-23 00:49:51
+# @Last Modified time: 2020-06-23 00:58:07
 
 from flask import render_template, abort, request,jsonify, redirect,url_for,flash, current_app, send_from_directory
 from . import main
@@ -25,7 +25,7 @@ from app.dingding import dingding
 #demo环境切换
 DEMO_ENV=False
 
-@main.route('/dingding')
+@main.route('/dingding',methods=['POST'])
 def dingding():
     dingding_send_info = {
         "address": request.headers.get('X-Forwarded-For',request.remote_addr) ,
