@@ -23,7 +23,7 @@ def create_app(config_name=None):
     
     app.config['SECRET_KEY'] = 'xxxxxxxxx'
 
-    app.debug = True
+    app.debug = False
     toolbar = DebugToolbarExtension()
     toolbar.init_app(app)
 
