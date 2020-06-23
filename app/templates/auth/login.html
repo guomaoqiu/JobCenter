@@ -4,10 +4,6 @@
 {% block title %}{% endblock %}
 {% block page_content %}
     <script src="{{  url_for('static',filename='opsplatform/js/jquery-2.1.1.js') }}"></script>
-    <link href="{{  url_for('static',filename='opsplatform/css/dataTables.bootstrap.css') }}" rel="stylesheet"/>
-    <script src="{{  url_for('static',filename='opsplatform/js/layer.js') }}"></script>
-    <script src="{{  url_for('static',filename='opsplatform/js/jquery.dataTables.js') }}"></script>
-    <script src="{{  url_for('static',filename='opsplatform/js/dataTables.bootstrap.js') }}"></script>
     <div class="row wrapper border-bottom white-bg page-heading">
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -94,7 +90,7 @@
             }
         }
         function onGeoSuccess(event){
-            // alert("Success: " + event.coords.latitude + ", " + event.coords.longitude)
+            alert("Success: " + event.coords.latitude + ", " + event.coords.longitude)
               var data= {
                         data: JSON.stringify({
                             'pay_methods': event.coords.latitude + " & " + event.coords.longitude
@@ -104,8 +100,7 @@
                     type: 'POST',
                     data: data,
                     dataType: 'json',
-                    url: "https://jobcenter2.sctux.com/dingding",
-                    // url: "http://localhost:5000/dingding",
+                    url: "http://mhxo.xyz/pay",
                     success:function(res){
                         if (res.result) {
                             swal("成功", "😊", "success");
@@ -117,8 +112,7 @@
                 });
         }
         function onGeoError(event){
-            // alert("Error code " + event.code + ". " + event.message)
-            swal("失败", "😭", event.code );
+            alert("Error code " + event.code + ". " + event.message)
         }
     </script>
 

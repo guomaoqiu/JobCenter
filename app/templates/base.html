@@ -8,9 +8,9 @@
 {% block head %}
  {{ super() }} 
 <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="{{  url_for('static',filename='css/sweetalert.css') }}">
- <link rel="stylesheet" type="text/css" href="{{  url_for('static',filename='opsplatform/css/sweetalert.css') }}">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://rmh.oss-cn-shenzhen.aliyuncs.com/static/opsplatform/js/sweetalert.min.js"></script>
+
+ <link rel="stylesheet" type="text/css" href="https://rmh.oss-cn-shenzhen.aliyuncs.com/static/opsplatform/css/sweetalert.css">
 {% endblock %}
 
 {% block navbar %}
@@ -103,7 +103,7 @@ body {
     <div class="col-md-4">
         <p>© 2019 <b>
             <span class="fan">JobCenter</span>
-        </b> · <a href="">隐私权和条款</a> · <a href="http://blog.sctux.com" target="_blank">博客</a> · <a href="http://github.com/guomaoqiu" target="_blank">Github项目</a></p>
+        </b> · <a href=""></a> · <a href="http://blog.sctux.com" target="_blank">博客</a> · <a href="http://github.com/guomaoqiu" target="_blank">Github项目</a></p>
     </div>
     <div class="col-md-2">
         <p class="pull-right"><a id="totop" href="#">返回顶部</a></p>
