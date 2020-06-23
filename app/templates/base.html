@@ -113,8 +113,6 @@ body {
 {% endblock %}
 
 {% block scripts %}
-<script src="{{  url_for('static',filename='opsplatform/js/layer.js') }}"></script>
-<script src="{{  url_for('static',filename='opsplatform/js/sweetalert.min.js') }}"></script>
 
 {{ super() }}
 {{ moment.include_moment() }}
